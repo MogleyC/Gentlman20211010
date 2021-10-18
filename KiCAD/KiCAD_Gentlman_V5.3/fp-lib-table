@@ -1,0 +1,3 @@
+(fp_lib_table
+  (lib (name STM32G070RBT6)(type KiCad)(uri ${KIPRJMOD}/Lib/STM32G070RBT6)(options "")(descr ""))
+)
