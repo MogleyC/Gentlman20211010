@@ -103,6 +103,7 @@
 /UnityClient/**/ProjectSettings/Physics2DSettings.asset
 /[Bb]uild/
 /Back/*
+/KiCad/**/*.bck
 
 # IAR
 /Iar/**/*.dep

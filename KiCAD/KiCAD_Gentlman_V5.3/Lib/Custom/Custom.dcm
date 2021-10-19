@@ -1,0 +1,57 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP +3.6V
+D Power symbol creates a global label with name "+3.6V"
+K power-flag
+$ENDCMP
+#
+$CMP +5V_copy
+D Power symbol creates a global label with name "+5V"
+K power-flag
+$ENDCMP
+#
+$CMP C
+K Cap Capacitor 1608
+$ENDCMP
+#
+$CMP CAP_104Z_25V_1608
+K Cap Capacitor 1608
+$ENDCMP
+#
+$CMP Conn_01x02
+D Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Conn_01x07
+D Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP R_10KJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_NC
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP W25Q128JVS
+D 128Mb Serial Flash Memory, Standard/Dual/Quad SPI, SOIC-8
+K flash memory SPI QPI DTR
+F http://www.winbond.com/resource-files/w25q128jv_dtr%20revc%2003272018%20plus.pdf
+$ENDCMP
+#
+$CMP W25Q32JVSS
+D 32Mb Serial Flash Memory, Standard/Dual/Quad SPI, SOIC-8
+K flash memory SPI
+F http://www.winbond.com/resource-files/w25q32jv%20revg%2003272018%20plus.pdf
+$ENDCMP
+#
+#End Doc Library

@@ -1,3 +1,4 @@
 (fp_lib_table
   (lib (name STM32G070RBT6)(type KiCad)(uri ${KIPRJMOD}/Lib/STM32G070RBT6)(options "")(descr ""))
+  (lib (name digikey-footprints)(type KiCad)(uri ${KIPRJMOD}/Lib/digikey-kicad-library-master/digikey-footprints.pretty)(options "")(descr ""))
 )
