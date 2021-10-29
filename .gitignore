@@ -93,6 +93,57 @@
 /KiCad/**/*.xml
 /KiCad/**/*.csv
 
+# Ses
+####### file info from http://igotit.tistory.com/955
+####### Listing files
+/Ses/**/*.COD
+/Ses/**/*.HTM
+/Ses/**/*.I
+/Ses/**/*.LST
+/Ses/**/*.MAP
+/Ses/**/*.M51
+/Ses/**/*.M66
+/Ses/**/*.SCR
+
+######## Object and HEX Files
+/Ses/**/*.AXF
+/Ses/**/*.D
+/Ses/**/*.O
+/Ses/**/*.SBR
+/Ses/**/*.CRF
+/Ses/**/*.ELF
+/Ses/**/*.H86
+/Ses/**/*.bin
+
+######## Other Files
+/Ses/**/*.BAK
+/Ses/**/*.LNP
+/Ses/**/*.iex
+/Ses/**/*.dep
+/Ses/**/*.uvguix.*
+/Ses/**/Backup/
+
+######################## start gitignore for SW4STM32
+#files being edited
+/Ses/**/*~
+
+# make and build files
+/Ses/**/*.lst
+/Ses/**/*.o
+/Ses/**/*.eep
+/Ses/**/*.lss
+/Ses/**/*.map
+/Ses/**/*.sym
+
+# I keep these, since I prefer having the reference of the final build
+# *.elf
+# *.hex
+
+######################## end gitignore for SW4STM32
+
+/Ses/**/Release/
+
+
 
 # Custom
 #/UnityClient/**/Assets/Resource*
