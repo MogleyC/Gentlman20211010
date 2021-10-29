@@ -33,7 +33,7 @@
       linker_memory_map_file="$(ProjectDir)/nRF52832_xxAA_MemoryMap.xml"
       linker_output_format="hex"
       linker_section_placement_file="$(ProjectDir)/flash_placement.xml"
-      macros="NRFHeaderFile=$(PackagesDir)/nRF/Device/Include/nrf.h;DeviceHeaderFile=$(PackagesDir)/nRF/Device/Include/nrf52.h;DeviceSystemFile=$(PackagesDir)/nRF/Device/Source/system_nrf52.c;DeviceVectorsFile=$(PackagesDir)/nRF/Device/Startup/ses_startup_nrf52.s;DeviceLinkerScript=$(PackagesDir)/nRF/Device/Linker/ses_nrf52832_xxaa.icf;DeviceMemoryMap=$(PackagesDir)/nRF/Device/MemoryMap/nRF52832_xxAA_MemoryMap.xml;DeviceLibraryIdentifier=M4lf;DeviceFamily=nRF;Target=nRF52832_xxAA;Placement=Flash;nRFSdkPath=../../nRF5_SDK"
+      macros="NRFHeaderFile=$(PackagesDir)/nRF/Device/Include/nrf.h;DeviceHeaderFile=$(PackagesDir)/nRF/Device/Include/nrf52.h;DeviceSystemFile=$(PackagesDir)/nRF/Device/Source/system_nrf52.c;DeviceVectorsFile=$(PackagesDir)/nRF/Device/Startup/ses_startup_nrf52.s;DeviceLinkerScript=$(PackagesDir)/nRF/Device/Linker/ses_nrf52832_xxaa.icf;DeviceMemoryMap=$(PackagesDir)/nRF/Device/MemoryMap/nRF52832_xxAA_MemoryMap.xml;DeviceLibraryIdentifier=M4lf;DeviceFamily=nRF;Target=nRF52832_xxAA;Placement=Flash;nRFSdkPath=../../nRF5_SDK;CMSIS_CONFIG_TOOL=../../nRF5_SDK/external_tools/cmsisconfig/CMSIS_Configuration_Wizard.jar"
       package_dependencies="CMSIS-CORE_V5"
       project_directory=""
       project_type="Executable"
@@ -77,6 +77,7 @@
     </folder>
     <folder Name="nRF_Drivers">
       <file file_name="$(nRFSdkPath)/modules/nrfx/drivers/src/nrfx_gpiote.c" />
+      <file file_name="$(nRFSdkPath)/modules/nrfx/drivers/src/nrfx_systick.c" />
     </folder>
   </project>
   <configuration

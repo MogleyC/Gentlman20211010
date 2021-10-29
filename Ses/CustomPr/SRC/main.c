@@ -5,6 +5,7 @@
 
 #include "Module_GPIO.h"
 #include "nrf_delay.h"
+#include "nrf_drv_systick.h"
 
 
 void in_pin_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
@@ -16,7 +17,8 @@ void in_pin_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
 		case 12:
 		{
 			nrf_drv_gpiote_out_set(13);
-			nrf_delay_ms(1000);
+			//nrf_delay_ms(1000);
+			nrf_drv_systick_delay_ms(1000);
 			nrf_drv_gpiote_out_clear(13);
 		}
 		break;
