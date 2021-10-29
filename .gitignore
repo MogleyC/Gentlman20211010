@@ -143,6 +143,10 @@
 
 /Ses/**/Release/
 
+/Ses/**/Output/
+/Ses/**/*.emSession
+/Ses/**/*.jlink
+/Ses/Back/
 
 
 # Custom
