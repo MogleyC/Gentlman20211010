@@ -147,6 +147,10 @@
 /Ses/**/*.emSession
 /Ses/**/*.jlink
 /Ses/Back/
+/Ses/nRF5_SDK/examples/
+/Ses/nRF5_SDK/documentation/
+/Ses/nRF5_SDK/external/fatfs/doc/
+/Ses/nRF5_SDK/doxydoc/
 
 
 # Custom
