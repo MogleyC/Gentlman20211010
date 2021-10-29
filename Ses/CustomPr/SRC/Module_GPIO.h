@@ -6,6 +6,7 @@ extern "C"
 {
 #endif
 
+#include "nrf_drv_gpiote.h"
 #include <stdint.h>
 
 	///	Initialize pin_num for output
@@ -26,6 +27,14 @@ extern "C"
 	// CheckVolLow=0 ->	OnEnable : ConnectedHighVoltage
 	// CheckVolLow=1 ->	OnEnable : ConnectedGnd
 	uint8_t	gpio_input_read(uint8_t	pin_num);
+
+	///	Initialize pin_num for interrupt
+	void gpioe_init();
+
+	void gpioe_output_set(uint8_t pin_num, bool	initEnable);
+
+	void gpioe_input_set(uint8_t pin_num, bool hi_accuracy,	uint16_t input_type,
+		nrf_gpio_pin_pull_t	pullType, nrf_drv_gpiote_evt_handler_t evt_handler);
 
 #ifdef __cplusplus
 }
