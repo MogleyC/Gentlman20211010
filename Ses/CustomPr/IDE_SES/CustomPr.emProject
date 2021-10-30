@@ -71,6 +71,7 @@
     <folder Name="Application">
       <file file_name="../SRC/main.c" />
       <file file_name="../SRC/sdk_config.h" />
+      <file file_name="../SRC/board_config.h" />
     </folder>
     <folder Name="SRC">
       <file file_name="../SRC/Module_GPIO.c" />
