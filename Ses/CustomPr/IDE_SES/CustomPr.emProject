@@ -70,15 +70,22 @@
     </folder>
     <folder Name="Application">
       <file file_name="../SRC/main.c" />
+      <file file_name="../SRC/sdk_config.h" />
     </folder>
     <folder Name="SRC">
       <file file_name="../SRC/Module_GPIO.c" />
-      <file file_name="../SRC/sdk_config.h" />
+      <file file_name="../SRC/Module_Clock.c" />
     </folder>
     <folder Name="nRF_Drivers">
       <file file_name="$(nRFSdkPath)/modules/nrfx/drivers/src/nrfx_gpiote.c" />
       <file file_name="$(nRFSdkPath)/modules/nrfx/drivers/src/nrfx_systick.c" />
+      <file file_name="$(nRFSdkPath)/integration/nrfx/legacy/nrf_drv_clock.c" />
+      <file file_name="$(nRFSdkPath)/modules/nrfx/drivers/src/nrfx_clock.c" />
     </folder>
+    <folder Name="nRF_Libraries">
+      <file file_name="$(nRFSdkPath)/components/libraries/util/app_util_platform.c" />
+    </folder>
+    <configuration Name="Debug" build_remove_unused_symbols="Yes" />
   </project>
   <configuration
     Name="Debug"

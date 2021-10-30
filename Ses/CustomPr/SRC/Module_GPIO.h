@@ -1,5 +1,5 @@
-#ifndef	MODULE_GPIO_H
-#define	MODULE_GPIO_H
+#ifndef MODULE_GPIO_H
+#define MODULE_GPIO_H
 
 #ifdef __cplusplus
 extern "C"
@@ -26,15 +26,15 @@ extern "C"
 	///	Get	status pin_num enable
 	// CheckVolLow=0 ->	OnEnable : ConnectedHighVoltage
 	// CheckVolLow=1 ->	OnEnable : ConnectedGnd
-	uint8_t	gpio_input_read(uint8_t	pin_num);
+	uint8_t gpio_input_read(uint8_t pin_num);
 
 	///	Initialize pin_num for interrupt
 	void gpioe_init();
 
-	void gpioe_output_set(uint8_t pin_num, bool	initEnable);
+	void gpioe_output_set(uint8_t pin_num, bool initEnable);
 
-	void gpioe_input_set(uint8_t pin_num, bool hi_accuracy,	uint16_t input_type,
-		nrf_gpio_pin_pull_t	pullType, nrf_drv_gpiote_evt_handler_t evt_handler);
+	void gpioe_input_set(uint8_t pin_num, bool hi_accuracy, uint16_t input_type,
+	    nrf_gpio_pin_pull_t pullType, nrf_drv_gpiote_evt_handler_t evt_handler);
 
 #ifdef __cplusplus
 }
