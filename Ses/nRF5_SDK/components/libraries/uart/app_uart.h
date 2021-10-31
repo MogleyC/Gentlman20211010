@@ -63,8 +63,8 @@ extern "C" {
  */
 typedef enum
 {
-    APP_UART_FLOW_CONTROL_DISABLED, /**< UART Hw Flow Control is disabled. */
     APP_UART_FLOW_CONTROL_ENABLED,  /**< Standard UART Hw Flow Control is enabled. */
+    APP_UART_FLOW_CONTROL_DISABLED, /**< UART Hw Flow Control is disabled. */
 } app_uart_flow_control_t;
 
 /**@brief UART communication structure holding configuration settings for the peripheral.
