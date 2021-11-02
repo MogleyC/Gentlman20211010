@@ -9,7 +9,7 @@ extern "C"
 #include <stdbool.h>
 #include <stdint.h>
 
-	void uart_init(bool UseFlowControl, bool ignoreDisconnect);
+	void uart_init(bool UseFlowControl, bool UseDisconnectAlert);
 
 	bool uart_get(uint8_t * pcr);
 

@@ -14,11 +14,14 @@
 
 #include "board_config.h"
 
+bool DisconnectAlert;
+
 void uart_error_handle(app_uart_evt_t * p_event)
 {
 	if (p_event->evt_type == APP_UART_COMMUNICATION_ERROR)
 	{
-		//APP_ERROR_HANDLER(p_event->data.error_communication);
+		if (DisconnectAlert)
+			APP_ERROR_HANDLER(p_event->data.error_communication);
 	}
 	else if (p_event->evt_type == APP_UART_FIFO_ERROR)
 	{
@@ -26,10 +29,11 @@ void uart_error_handle(app_uart_evt_t * p_event)
 	}
 }
 
-void uart_init(bool UseFlowControl, bool ignoreDisconnect)
+void uart_init(bool UseFlowControl, bool UseDisconnectAlert)
 {
 
 	app_uart_flow_control_t SetFlowCtl = APP_UART_FLOW_CONTROL_DISABLED;
+	DisconnectAlert = UseDisconnectAlert;
 
 
 	if (UseFlowControl == true)
@@ -55,9 +59,6 @@ void uart_init(bool UseFlowControl, bool ignoreDisconnect)
 	APP_UART_FIFO_INIT(&comm_params, UART_RX_BUF_SIZE, UART_TX_BUF_SIZE, uart_error_handle,
 	    APP_IRQ_PRIORITY_LOWEST, err_code);
 
-	if (ignoreDisconnect)
-		return;
-
 	APP_ERROR_CHECK(err_code);
 }
 
@@ -82,7 +83,7 @@ void uart_flush()
 
 //void uart_ProgressExample()
 //{
-//	uart_init(false, true);
+//	uart_init(false, false);
 //	uart_flush();
 
 //	while (1)
