@@ -66,7 +66,7 @@ uint32_t radio_read_packet()
 void rssiTx_ProgressExample()
 {
 	radio_Init();
-	
+
 	uint8_t NowTxPacket = 0;
 	while (1)
 	{
@@ -82,6 +82,65 @@ void rssiTx_ProgressExample()
 			}
 
 			NowTxPacket = 0;
+		}
+	}
+}
+
+#include "Module_GPIO.h"
+#include "nrf_drv_systick.h"
+void radioiTx_ProgressExample()
+{
+	gpioe_init();
+	gpioe_output_set(LED_1_PIN_NUMBER, true);
+	nrf_drv_systick_init();
+	
+	radio_Init();
+
+	while (1)
+	{
+		for (uint8_t i = 0; i < 4; ++i)
+		{
+			radio_send_packet(i);
+			nrf_drv_gpiote_out_toggle(LED_1_PIN_NUMBER);
+			nrf_drv_systick_delay_ms(500);
+		}
+	}
+}
+
+#include "Module_GPIO.h"
+void radioiRx_ProgressExample()
+{
+	gpioe_init();
+	gpioe_output_set(LED_1_PIN_NUMBER, true);
+	gpioe_output_set(LED_2_PIN_NUMBER, true);
+	
+	radio_Init();
+
+	while (1)
+	{
+		uint8_t tmpPacket = radio_read_packet();
+
+		switch (tmpPacket)
+		{
+			case 0:
+				nrf_drv_gpiote_out_set(LED_1_PIN_NUMBER);
+				nrf_drv_gpiote_out_clear(LED_2_PIN_NUMBER);
+				break;
+
+			case 1:
+				nrf_drv_gpiote_out_clear(LED_1_PIN_NUMBER);
+				nrf_drv_gpiote_out_set(LED_2_PIN_NUMBER);
+				break;
+
+			case 2:
+				nrf_drv_gpiote_out_clear(LED_1_PIN_NUMBER);
+				nrf_drv_gpiote_out_clear(LED_2_PIN_NUMBER);
+				break;
+
+			case 3:
+				nrf_drv_gpiote_out_set(LED_1_PIN_NUMBER);
+				nrf_drv_gpiote_out_set(LED_2_PIN_NUMBER);
+				break;
 		}
 	}
 }

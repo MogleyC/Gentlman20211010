@@ -13,6 +13,8 @@ extern "C"
 	uint32_t radio_read_packet();
 
 	void rssiTx_ProgressExample();
+	void radioiTx_ProgressExample();
+	void radioiRx_ProgressExample();
 
 
 #ifdef __cplusplus

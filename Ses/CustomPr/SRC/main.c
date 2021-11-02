@@ -37,8 +37,8 @@ int main()
 	gpioe_output_set(LED_2_PIN_NUMBER, true);
 	gpioe_input_set(BTN_1_PIN_NUMBER, true, 1, NRF_GPIO_PIN_PULLUP, in_pin_handler);
 	
-	//rssi_ProgressExample();
-	rssiTx_ProgressExample();
-	
+	//radioiTx_ProgressExample();
+	radioiRx_ProgressExample();
+
 	while (1) {}
 }
