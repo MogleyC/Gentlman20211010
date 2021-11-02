@@ -18,7 +18,7 @@ void uart_error_handle(app_uart_evt_t * p_event)
 {
 	if (p_event->evt_type == APP_UART_COMMUNICATION_ERROR)
 	{
-		APP_ERROR_HANDLER(p_event->data.error_communication);
+		//APP_ERROR_HANDLER(p_event->data.error_communication);
 	}
 	else if (p_event->evt_type == APP_UART_FIFO_ERROR)
 	{
@@ -26,7 +26,7 @@ void uart_error_handle(app_uart_evt_t * p_event)
 	}
 }
 
-void uart_init(bool UseFlowControl)
+void uart_init(bool UseFlowControl, bool ignoreDisconnect)
 {
 
 	app_uart_flow_control_t SetFlowCtl = APP_UART_FLOW_CONTROL_DISABLED;
@@ -55,12 +55,15 @@ void uart_init(bool UseFlowControl)
 	APP_UART_FIFO_INIT(&comm_params, UART_RX_BUF_SIZE, UART_TX_BUF_SIZE, uart_error_handle,
 	    APP_IRQ_PRIORITY_LOWEST, err_code);
 
+	if (ignoreDisconnect)
+		return;
+
 	APP_ERROR_CHECK(err_code);
 }
 
 bool uart_get(uint8_t * pcr)
 {
-	if(app_uart_get(pcr) == NRF_SUCCESS)
+	if (app_uart_get(pcr) == NRF_SUCCESS)
 	{
 		return true;
 	}
@@ -69,7 +72,36 @@ bool uart_get(uint8_t * pcr)
 
 void uart_put(uint8_t cr)
 {
-	while (app_uart_put(cr) != NRF_SUCCESS)
-	{
-	}
+	while (app_uart_put(cr) != NRF_SUCCESS) {}
 }
+
+void uart_flush()
+{
+	app_uart_flush();
+}
+
+//void uart_ProgressExample()
+//{
+//	uart_init(false, true);
+//	uart_flush();
+
+//	while (1)
+//	{
+//		uint8_t cr;
+//		if (uart_get(&cr) == true)
+//		{
+
+
+//			if (cr >= 'A' && cr <= 'Z')
+//			{
+//				cr += 32; // = 'a' - 'A' = 97 - 65;
+//			}
+//			else if (cr >= 'a' && cr <= 'z')
+//			{
+//				cr -= 32; // = 'a' - 'A' = 97 - 65;
+//			}
+
+//			uart_put(cr);
+//		}
+//	}
+//}

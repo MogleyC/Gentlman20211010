@@ -6,14 +6,16 @@ extern "C"
 {
 #endif
 
-#include <stdint.h>
 #include <stdbool.h>
+#include <stdint.h>
 
-	void uart_init(bool UseFlowControl);
+	void uart_init(bool UseFlowControl, bool ignoreDisconnect);
 
 	bool uart_get(uint8_t * pcr);
 
 	void uart_put(uint8_t cr);
+
+	void uart_flush();
 
 #ifdef __cplusplus
 }

@@ -17,13 +17,13 @@ extern "C"
 //#define NRF52832_XXAA
 //#define NRF52_PAN_74
 
-#define LED_1_PIN_NUMBER 13
-#define LED_2_PIN_NUMBER 12
-#define BTN_1_PIN_NUMBER 11
+#define LED_1_PIN_NUMBER 16
+#define LED_2_PIN_NUMBER 17
+#define BTN_1_PIN_NUMBER 15
 
-#define RX_PIN_NUMBER 17
-#define TX_PIN_NUMBER 16
-#define CTS_PIN_NUMBER 15
+#define RX_PIN_NUMBER 11
+#define TX_PIN_NUMBER 12
+#define CTS_PIN_NUMBER 13
 #define RTS_PIN_NUMBER 14
 
 #define UART_TX_BUF_SIZE 256                         /**< UART TX buffer size. */

@@ -71,8 +71,13 @@ uint8_t gpio_input_read(uint8_t pin_num)
 	return (((reg->IN) >> pin_num) & 1U);
 }
 
+bool IsInited = false;
+
 void gpioe_init()
 {
+	if (IsInited)
+		return;
+		
 	nrf_drv_gpiote_init();
 }
 
