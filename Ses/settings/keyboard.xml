@@ -78,7 +78,6 @@
     <item name="DebugResetActive"><key>Ctrl+Alt+F5</key></item>
     <item name="DebugStartOzone"><key>Alt+F5</key></item>
     <item name="DebugVerifyActive"><key>Ctrl+T, V</key></item>
-    <item name="EditCamelcase"><key>Ctrl+K, Ctrl+Shift+U</key></item>
     <item name="EditColumnTidy"><key>Ctrl+K, L</key></item>
     <item name="EditComment"><key>Ctrl+K, Ctrl+C</key></item>
     <item name="EditCopy"><key>Ctrl+C</key><alt>Ctrl+Ins</alt></item>
@@ -118,7 +117,7 @@
     <item name="EditGoToHeaderOpposite"><key>Alt+Shift+L</key></item>
     <item name="EditGoToLine"><key>Ctrl+G</key><alt>Ctrl+Q, G</alt></item>
     <item name="EditInsertFile"><key>Ctrl+K, Ctrl+I</key></item>
-    <item name="EditInsertHardTab"><key>Ctrl+K, Tab</key></item>
+    <item name="EditInsertHardTab"><key>Ctrl+Q, Tab</key></item>
     <item name="EditJoinLines"><key>Ctrl+K, J</key></item>
     <item name="EditJoinLinesWithoutSpace"><key>Ctrl+K, Shift+J</key></item>
     <item name="EditLocateNext"><key>F4</key></item>
@@ -133,6 +132,7 @@
     <item name="EditRedo"><key>Ctrl+Shift+Z</key><alt>Alt+Shift+Backspace</alt></item>
     <item name="EditRedoAll"><key>Ctrl+K, Ctrl+Y</key></item>
     <item name="EditReplace"><key>Ctrl+H</key></item>
+    <item name="EditRestoreTextSize"><key>Ctrl+0</key></item>
     <item name="EditScrollToBottom"><key>Ctrl+Q, End</key></item>
     <item name="EditScrollToTop"><key>Ctrl+Q, Home</key></item>
     <item name="EditSelectAll"><key>Ctrl+A</key></item>
@@ -162,9 +162,7 @@
     <item name="EditUndoAll"><key>Ctrl+K, Ctrl+Z</key></item>
     <item name="EditUppercase"><key>Ctrl+K, U</key><alt>Ctrl+Shift+U</alt></item>
     <item name="EditUppercaseHex"><key>Ctrl+K, Ctrl+H</key></item>
-    <item name="EditorNext"><key>Meta+Tab</key></item>
     <item name="EditorNextTab"><key>Alt+PgDown</key></item>
-    <item name="EditorPrev"><key>Meta+Shift+Tab</key></item>
     <item name="EditorPrevTab"><key>Alt+PgUp</key></item>
     <item name="EraseAllConnected"><key>Ctrl+T, K</key></item>
     <item name="FileClose"><key>Ctrl+F4</key></item>
@@ -206,6 +204,7 @@
     <item name="FocusPendingChangesWindow"><key>Ctrl+R, Ctrl+R</key></item>
     <item name="FocusProjectExplorerWindow"><key>Ctrl+Alt+P</key><alt>Ctrl+P, Ctrl+P</alt></item>
     <item name="FocusProjectFilter"><key>Ctrl+;</key></item>
+    <item name="FocusReferencesWindow"><key>Ctrl+Alt+R</key></item>
     <item name="FocusRegisters1Window"><key>Ctrl+T, R, 1</key><alt>Alt+5</alt></item>
     <item name="FocusRegisters2Window"><key>Ctrl+T, R, 2</key></item>
     <item name="FocusRegisters3Window"><key>Ctrl+T, R, 3</key></item>
@@ -265,7 +264,9 @@
     <item name="TargetReconnectConnected"><key>Ctrl+T, E</key></item>
     <item name="TargetResetConnected"><key>Ctrl+T, S</key></item>
     <item name="ToggleProjectSourceControlFilter"><key>Ctrl+P, Ctrl+K</key></item>
+    <item name="Tool.CMSIS_Config_Wizard"><key>Ctrl+Y</key></item>
     <item name="Tool.Disassembler"><key>Ctrl+K, Ctrl+V</key></item>
+    <item name="Tool.PClint"><key>Ctrl+L, Ctrl+P</key></item>
     <item name="ToolCheckSyntax"><key>Ctrl+Q, Ctrl+Y</key></item>
     <item name="ToolFindInFiles"><key>Ctrl+Shift+F</key><alt>Shift+Search</alt></item>
     <item name="ToolOptions"><key>Alt+,</key></item>
@@ -273,7 +274,6 @@
     <item name="ViewFullScreen"><key>Alt+Shift+Return</key></item>
     <item name="ViewProperties"><key>Alt+Return</key></item>
     <item name="ViewRefresh"><alt>Refresh</alt></item>
-    <item name="ViewToggleDockTitles"><key>Meta+H</key></item>
     <item name="ViewToggleDocks"><key>Shift+Esc</key></item>
     <item name="Waypoint.Back"><key>Alt+Left</key><alt>Back</alt></item>
     <item name="Waypoint.Forward"><key>Alt+Right</key><alt>Forward</alt></item>
