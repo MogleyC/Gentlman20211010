@@ -1,26 +1,11 @@
 <!DOCTYPE CrossWorks_Settings_File>
 <settings>
-  <setting name="Environment/Active Studio Theme">Light</setting>
-  <setting name="Environment/Application Main Font">Segoe UI,9,-1,5,50,0,0,0,0,0</setting>
-  <setting name="Environment/Application Monospace Font">Consolas,10,-1,5,50,0,0,0,0,0</setting>
-  <setting name="Environment/Browser/Favorites">AAAACgAAADoAaAB0AHQAcAA6AC8ALwB3AHcAdwAuAHMAZQBnAGcAZQByAC4AYwBvAG0ALwByAHMAcwAuAHgAbQBsAAAAKABMAGEAdABlAHMAdAAgAE4AZQB3AHMAIABSAFMAUwAgAEYAZQBlAGQAAAABACWHhQN5j3f/AAAAAP//////AAAABQAAAAwAUwBFAEcARwBFAFIAAAABAAAAAP////////////////////8AAAAA//////8AAAAAAAAAAP//////////</setting>
-  <setting name="Environment/Browser/Favorites Auto Added">AAAACgAAADoAaAB0AHQAcAA6AC8ALwB3AHcAdwAuAHMAZQBnAGcAZQByAC4AYwBvAG0ALwByAHMAcwAuAHgAbQBsAAAAKABMAGEAdABlAHMAdAAgAE4AZQB3AHMAIABSAFMAUwAgAEYAZQBlAGQAAAABACWHhQN5j3f/AAAAAP//////AAAABQAAAAwAUwBFAEcARwBFAFIAAAABAAAAAP////////////////////8AAAAA//////8AAAAAAAAAAP//////////</setting>
-  <setting name="Environment/Browser/History">AAAACgAAAJIAQwA6AC8AUAByAG8AZwByAGEAbQAgAEYAaQBsAGUAcwAvAFMARQBHAEcARQBSAC8AUwBFAEcARwBFAFIAIABFAG0AYgBlAGQAZABlAGQAIABTAHQAdQBkAGkAbwAgAGYAbwByACAAQQBSAE0AIAA1AC4ANgA0AC8AaAB0AG0AbAAvAGgAbwBtAGUALgBoAHQAbQAAABAAaABvAG0AZQAuAGgAdABtAAAAAQAlh4UDeZBC/wAAAAD//////wAAAAAAAAAaAFUAbgBjAGEAdABlAGcAbwByAGkAegBlAGQAAAAAAAAAAP////////////////////8AAAAA//////8AAAAAAAAAAP//////////</setting>
-  <setting name="Environment/Build/Building Threads">0</setting>
-  <setting name="Environment/File History">AAAACg==</setting>
-  <setting name="Environment/Main Window/Splitters/Bottom Splitter/">0,0</setting>
-  <setting name="Environment/Main Window/Splitters/Central Splitter/">0,0</setting>
-  <setting name="Environment/Main Window/Splitters/Edit Splitter/">0,0</setting>
-  <setting name="Environment/Main Window/Splitters/Left Splitter/">0,0,0</setting>
-  <setting name="Environment/Main Window/Splitters/Main Splitter/">0,0,0</setting>
-  <setting name="Environment/Main Window/Splitters/MainSplitter">0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0</setting>
-  <setting name="Environment/Main Window/Splitters/Right Splitter/">0,0,0</setting>
-  <setting name="Environment/Project History">AAAACgAAAKgAQwA6AC8AVQBzAGUAcgBzAC8ASwBTAEcALwBEAG8AYwB1AG0AZQBuAHQAcwAvAFMARQBHAEcARQBSACAARQBtAGIAZQBkAGQAZQBkACAAUwB0AHUAZABpAG8AIABmAG8AcgAgAEEAUgBNACAAUAByAG8AagBlAGMAdABzAC8ASABlAGwAbABvAC8ASABlAGwAbABvAC4AZQBtAFAAcgBvAGoAZQBjAHQAAAAKAHQAaQB0AGwAZQAAAAEAJYeFA3mQtf8AAAAA//////8AAAAAAAAAEABjAGEAdABlAGcAbwByAHkAAAAAAAAAAP////////////////////8AAAAA//////8AAAAAAAAAAP//////////</setting>
-  <setting name="Environment/RSS History">AAAACg==</setting>
-  <setting name="Environment/Studio Theme">Light</setting>
-  <setting name="Environment/Task History">AAAACg==</setting>
-  <setting name="Text Editor/Color Scheme V4">CrossWorks Standard;0,Automatic,Automatic;0,#c00000,Automatic;0,#008000,Automatic;1,#000080,Automatic;0,#808080,Automatic;1,#ff9900,Automatic;0,#008080,Automatic;0,Automatic,Automatic;0,#000080,Automatic;1,Automatic,Automatic;0,#ffffff,#ff0000;0,#ffff00,#ff6600;0,#ff6600,Automatic;0,#808080,Automatic;0,#000080,Automatic;0,Automatic,Automatic;2,#008000,Automatic;0,Automatic,Automatic;0,#ffeb9c,Automatic;0,#ffffb7,Automatic;0,#bcffba,Automatic;0,#eaffee,Automatic;0,#ffddb4,Automatic;0,#f9cca7,Automatic;0,#d62430,Automatic;0,#ffffe7,Automatic;0,Automatic,Automatic;0,#a0a0a0,Automatic;0,#f0f0f0,Automatic;0,#c00000,Automatic;0,#c00000,Automatic;0,#ff0000,Automatic;1,#000080,Automatic;0,Automatic,Automatic;0,Automatic,Automatic;0,Automatic,Automatic</setting>
+  <setting name="Environment/Build/Show Build Information">Yes</setting>
+  <setting name="Environment/Build/Show Unparsed Error Output">Yes</setting>
+  <setting name="Find In Files/Context">Entire Solution</setting>
+  <setting name="Find Window/File Type">*.*</setting>
   <setting name="Text Editor/Default Codec">EUC-KR</setting>
+  <setting name="Text Editor/Find/History">NRF_SDH_BLE_PERIPHERAL_LINK_COUNT;APP_TIMER_V2_RTC1;APP_TIMER_V2_RTC1_ENABLED;NRF_BLE_GATT_ENABLED;BLE_GATT_;ble_nus_on_ble_evt;ble_nus_on_ble;m_nus;m_qwr;bsp_event_handler</setting>
   <setting name="Text Editor/Font">????u,10,-1,5,50,0,0,0,0,0</setting>
   <setting name="Text Editor/Formatting/AlignTrailingComments">No</setting>
   <setting name="Text Editor/Formatting/AllowShortBlocksOnASingleLine">Yes</setting>
