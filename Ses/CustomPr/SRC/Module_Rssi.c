@@ -250,7 +250,7 @@ void rssi_ProgressExample()
 
 	nrf_drv_systick_init();
 
-	uart_init(false, false);
+	uart_init(NULL);
 	uart_flush();
 
 	rssi_measurer_configure_radio();

@@ -1,9 +1,5 @@
 #include "Module_Uart.h"
 
-//#include "nrf52.h"
-//#include "nrf52_bitfields.h"
-
-#include "app_uart.h"
 #include <nrfx.h>
 #if defined(UART_PRESENT)
 #include "nrf_uart.h"
@@ -11,8 +7,10 @@
 #if defined(UARTE_PRESENT)
 #include "nrf_uarte.h"
 #endif
-
 #include "board_config.h"
+
+#define UART_UseFlowControl 0
+#define UART_UseDisconnectAlert 0
 
 bool DisconnectAlert;
 
@@ -20,8 +18,9 @@ void uart_error_handle(app_uart_evt_t * p_event)
 {
 	if (p_event->evt_type == APP_UART_COMMUNICATION_ERROR)
 	{
-		if (DisconnectAlert)
-			APP_ERROR_HANDLER(p_event->data.error_communication);
+#if UART_UseDisconnectAlert
+		APP_ERROR_HANDLER(p_event->data.error_communication);
+#endif
 	}
 	else if (p_event->evt_type == APP_UART_FIFO_ERROR)
 	{
@@ -29,17 +28,17 @@ void uart_error_handle(app_uart_evt_t * p_event)
 	}
 }
 
-void uart_init(bool UseFlowControl, bool UseDisconnectAlert)
+void uart_init(void * evtHandle)
 {
-
 	app_uart_flow_control_t SetFlowCtl = APP_UART_FLOW_CONTROL_DISABLED;
-	DisconnectAlert = UseDisconnectAlert;
-
-
-	if (UseFlowControl == true)
+	if (evtHandle == NULL)
 	{
-		SetFlowCtl = APP_UART_FLOW_CONTROL_ENABLED;
+		evtHandle = uart_error_handle;
 	}
+
+#if UART_UseFlowControl
+	SetFlowCtl = APP_UART_FLOW_CONTROL_ENABLED;
+#endif
 
 	const app_uart_comm_params_t comm_params = {
 		RX_PIN_NUMBER,
@@ -56,8 +55,8 @@ void uart_init(bool UseFlowControl, bool UseDisconnectAlert)
 	};
 
 	uint32_t err_code;
-	APP_UART_FIFO_INIT(&comm_params, UART_RX_BUF_SIZE, UART_TX_BUF_SIZE, uart_error_handle,
-	    APP_IRQ_PRIORITY_LOWEST, err_code);
+	APP_UART_FIFO_INIT(&comm_params, UART_RX_BUF_SIZE, UART_TX_BUF_SIZE,
+	    (app_uart_event_handler_t)evtHandle, APP_IRQ_PRIORITY_LOWEST, err_code);
 
 	APP_ERROR_CHECK(err_code);
 }
@@ -83,7 +82,7 @@ void uart_flush()
 
 //void uart_ProgressExample()
 //{
-//	uart_init(false, false);
+//	uart_init(false, false, null);
 //	uart_flush();
 
 //	while (1)

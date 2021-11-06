@@ -4,12 +4,18 @@
 #include "nrf52_bitfields.h"
 
 #include "nrf_drv_clock.h"
+#include "app_error.h"
+
+#include "nrf_sdh.h"
 
 void nrf_clock_init()
 {
 	// sdk_cofnig.h에 설정값에 의해 셋팅이 좌우지 된다.
-
-	nrf_drv_clock_init();
+	uint32_t err_code;
+	
+	err_code = nrf_drv_clock_init();
+	APP_ERROR_CHECK(err_code);
+	
 	nrf_drv_clock_hfclk_request(NULL); // for HF 32MHz external X-tal
 	while (!nrf_drv_clock_hfclk_is_running()) {}
 
