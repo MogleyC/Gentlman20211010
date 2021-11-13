@@ -14,13 +14,13 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Sheet
-S 850  900  1650 1200
+S 1000 1000 6500 4000
 U 616E62D0
 F0 "Main" 50
 F1 "Main.sch" 50
 $EndSheet
 $Sheet
-S 800  2450 1750 1100
+S 1000 7000 6500 4000
 U 616E6A47
 F0 "OutPulsePart" 50
 F1 "OutPulsePart.sch" 50

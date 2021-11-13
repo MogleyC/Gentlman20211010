@@ -1,7 +1,6 @@
 (sym_lib_table
   (lib (name Custom)(type Legacy)(uri ${KIPRJMOD}/Lib/Custom/Custom.lib)(options "")(descr ""))
   (lib (name STM32G070RBT6)(type Legacy)(uri ${KIPRJMOD}/Lib/STM32G070RBT6/STM32G070RBT6.lib)(options "")(descr ""))
-  (lib (name +3v6)(type Legacy)(uri ${KIPRJMOD}/Lib/Custom/+3v6.lib)(options "")(descr ""))
   (lib (name dk_Addressable-Specialty)(type Legacy)(uri ${KIPRJMOD}/Lib/digikey-kicad-library-master/digikey-symbols/dk_Addressable-Specialty.lib)(options "")(descr ""))
   (lib (name dk_Alarms-Buzzers-and-Sirens)(type Legacy)(uri ${KIPRJMOD}/Lib/digikey-kicad-library-master/digikey-symbols/dk_Alarms-Buzzers-and-Sirens.lib)(options "")(descr ""))
   (lib (name dk_Automotive-Relays)(type Legacy)(uri ${KIPRJMOD}/Lib/digikey-kicad-library-master/digikey-symbols/dk_Automotive-Relays.lib)(options "")(descr ""))
@@ -152,5 +151,6 @@
   (lib (name dk_TVS-Diodes)(type Legacy)(uri ${KIPRJMOD}/Lib/digikey-kicad-library-master/digikey-symbols/dk_TVS-Diodes.lib)(options "")(descr ""))
   (lib (name dk_TVS-Mixed-Technology)(type Legacy)(uri ${KIPRJMOD}/Lib/digikey-kicad-library-master/digikey-symbols/dk_TVS-Mixed-Technology.lib)(options "")(descr ""))
   (lib (name dk_USB-DVI-HDMI-Connectors)(type Legacy)(uri ${KIPRJMOD}/Lib/digikey-kicad-library-master/digikey-symbols/dk_USB-DVI-HDMI-Connectors.lib)(options "")(descr ""))
+  (lib (name Main-rescue)(type Legacy)(uri ${KIPRJMOD}/Main-rescue.lib)(options "")(descr ""))
   (lib (name KiCAD_Gentlman_V5.3-rescue)(type Legacy)(uri ${KIPRJMOD}/KiCAD_Gentlman_V5.3-rescue.lib)(options "")(descr ""))
 )

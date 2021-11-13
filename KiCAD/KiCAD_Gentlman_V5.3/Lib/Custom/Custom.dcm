@@ -5,17 +5,63 @@ D Power symbol creates a global label with name "+3.6V"
 K power-flag
 $ENDCMP
 #
-$CMP +5V_copy
+$CMP +5V
 D Power symbol creates a global label with name "+5V"
 K power-flag
 $ENDCMP
 #
-$CMP C
+$CMP 2N5401S
+D PNP transistor, base/emitter/collector
+K transistor PNP
+F ~
+$ENDCMP
+#
+$CMP 2N5551S
+D NPN transistor, base/emitter/collector
+K transistor NPN
+F ~
+$ENDCMP
+#
+$CMP 2SA1981SY
+D PNP transistor, base/emitter/collector
+K transistor PNP
+F ~
+$ENDCMP
+#
+$CMP BL-HBHG8JE36K-TRB-T05
+D RGB LED, anode/red/green/blue
+K LED RGB diode
+F ~
+$ENDCMP
+#
+$CMP CAP_101K_250V_2012
+K Cap Capacitor 1608
+$ENDCMP
+#
+$CMP CAP_103K_250V_3216
+K Cap Capacitor 1608
+$ENDCMP
+#
+$CMP CAP_103K_25V_1608
 K Cap Capacitor 1608
 $ENDCMP
 #
 $CMP CAP_104Z_25V_1608
 K Cap Capacitor 1608
+$ENDCMP
+#
+$CMP CAP_105K_250V_4532
+K Cap Capacitor 1608
+$ENDCMP
+#
+$CMP CAP_105Z_6.3V_1608
+K Cap Capacitor 1608
+$ENDCMP
+#
+$CMP CAP_220uF_6.3V_SC6.3X5.8
+D Polarized capacitor, small US symbol
+K cap capacitor
+F ~
 $ENDCMP
 #
 $CMP Conn_01x02
@@ -30,7 +76,120 @@ K connector
 F ~
 $ENDCMP
 #
+$CMP Conn_01x08
+D Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP Conn_01x09
+D Generic connector, single row, 01x09, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP FDT86246L
+D N-MOSFET transistor, gate/drain/source
+K transistor NMOS N-MOS N-MOSFET
+F ~
+$ENDCMP
+#
+$CMP LMT117-ADJ
+D 1A Low Dropout regulator, positive, adjustable output, SOT-223
+K linear regulator ldo adjustable positive obsolete
+F http://www.diodes.com/datasheets/AP1117.pdf
+$ENDCMP
+#
+$CMP MBRAF3200T3G
+D 20V 1A Schottky Barrier Rectifier Diode, SMA(DO-214AC)
+K diode Schottky
+$ENDCMP
+#
+$CMP R_0RJ_6432
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_100KJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_100RJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
 $CMP R_10KJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_120RJ_3216
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_150KF_2012
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_1KF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_2.7KF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_22KJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_270RF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_390RJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_4.7KF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_47RJ
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_510RF
+D Resistor symbol for simulation only
+K resistor simulation
+F ~
+$ENDCMP
+#
+$CMP R_8.2KF
 D Resistor symbol for simulation only
 K resistor simulation
 F ~
@@ -40,6 +199,36 @@ $CMP R_NC
 D Resistor symbol for simulation only
 K resistor simulation
 F ~
+$ENDCMP
+#
+$CMP SC7850D-221K
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F ~
+$ENDCMP
+#
+$CMP SMBJ15A
+D Bidirectional transient-voltage-suppression diode, filled shape
+K diode TVS thyrector
+F ~
+$ENDCMP
+#
+$CMP SW_Push
+D Push button switch, generic, two pins
+K switch normally-open pushbutton push-button
+F ~
+$ENDCMP
+#
+$CMP ULN2003D1013TR
+D IC PWR RELAY 7NPN 1:1 16SO
+K 497-2345-1-ND
+F http://www.st.com/content/ccc/resource/technical/document/datasheet/f3/6e/c8/64/4d/b3/4e/38/CD00001244.pdf/files/CD00001244.pdf/jcr:content/translations/en.CD00001244.pdf
+$ENDCMP
+#
+$CMP USB-TYPE-C-31-M-17
+D USB 2.0-only Type-C Plug connector
+K usb universal serial bus type-C USB2.0
+F https://www.usb.org/sites/default/files/documents/usb_type-c.zip
 $ENDCMP
 #
 $CMP W25Q128JVS
@@ -52,6 +241,12 @@ $CMP W25Q32JVSS
 D 32Mb Serial Flash Memory, Standard/Dual/Quad SPI, SOIC-8
 K flash memory SPI
 F http://www.winbond.com/resource-files/w25q32jv%20revg%2003272018%20plus.pdf
+$ENDCMP
+#
+$CMP WR106SR-W
+D Light emitting diode
+K LED diode
+F ~
 $ENDCMP
 #
 #End Doc Library
