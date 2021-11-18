@@ -3,7 +3,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A3 16535 11693
 encoding utf-8
-Sheet 1 3
+Sheet 1 4
 Title "GentlemanV5.3"
 Date "2021-10-19"
 Rev "0.1"
@@ -24,5 +24,11 @@ S 1000 7000 6500 4000
 U 616E6A47
 F0 "OutPulsePart" 50
 F1 "OutPulsePart.sch" 50
+$EndSheet
+$Sheet
+S 9000 1000 6500 3950
+U 61979BEC
+F0 "Bluetooth" 50
+F1 "Bluetooth.sch" 50
 $EndSheet
 $EndSCHEMATC

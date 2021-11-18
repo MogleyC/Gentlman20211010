@@ -46,6 +46,12 @@ K transistor PNP
 F .\Dataseets\AUKCS02423-1.pdf
 $ENDCMP
 #
+$CMP ANT
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F .\Dataseets\001-91445_AN91445_Antenna_Design_and_RF_Layout_Guidelines.pdf
+$ENDCMP
+#
 $CMP AP4890
 F .\Dataseets\aP4890K_DataSheet.pdf
 $ENDCMP
@@ -54,6 +60,21 @@ $CMP BL-HBHG8JE36K-TRB-T05
 D RGB LED, anode/red/green/blue
 K LED RGB diode
 F .\Dataseets\BL-HBHG8JE36K-TRB-T05(3color).pdf
+$ENDCMP
+#
+$CMP CAP_0.1uF_1005
+K Cap Capacitor 1005
+F .\Dataseets\GRM155R61A104JA01_02A-1983809.pdf
+$ENDCMP
+#
+$CMP CAP_0.8pF_1005
+K Cap Capacitor 1005
+F .\Dataseets\GRM1555C1HR80WA01_01A-1983059.pdf
+$ENDCMP
+#
+$CMP CAP_100nF_1005
+K Cap Capacitor 1005
+F .\Dataseets\GRM155R61H104KE14_01A-1983917.pdf
 $ENDCMP
 #
 $CMP CAP_101K_250V_2012
@@ -84,9 +105,29 @@ K Cap Capacitor 1608
 F ~
 $ENDCMP
 #
+$CMP CAP_12pF_1005
+K Cap Capacitor 1005
+F .\Dataseets\GRM1555C1H120GA01_01A-1982688.pdf
+$ENDCMP
+#
+$CMP CAP_1uF_1005
+K Cap Capacitor 1005
+F .\Dataseets\Samsung_MLCC_1837944-1929650.pdf
+$ENDCMP
+#
 $CMP CAP_220uF_6.3V_SC6.3X5.8
 D Polarized capacitor, small US symbol
 K cap capacitor
+F ~
+$ENDCMP
+#
+$CMP CAP_4.7uF_1005
+K Cap Capacitor 1005
+F .\Dataseets\MLCC-1837944.pdf
+$ENDCMP
+#
+$CMP CAP_N.C_1005
+K Cap Capacitor 1005
 F ~
 $ENDCMP
 #
@@ -102,10 +143,28 @@ K linear regulator ldo adjustable positive obsolete
 F .\Dataseets\AX1117_LMT117-ADJ.pdf
 $ENDCMP
 #
+$CMP L_3.9nH
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F .\Dataseets\7447840039G-2492425.pdf
+$ENDCMP
+#
 $CMP MBRAF3200T3G
 D 20V 1A Schottky Barrier Rectifier Diode, SMA(DO-214AC)
 K diode Schottky
 F .\Dataseets\MBRAF3200T3_D-2315037.pdf
+$ENDCMP
+#
+$CMP PinHeader2.54mm_6
+D Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
+$ENDCMP
+#
+$CMP PinHeader2.54mm_7
+D Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F ~
 $ENDCMP
 #
 $CMP R_0RJ_6432
@@ -210,12 +269,6 @@ K inductor choke coil reactor magnetic
 F http://seokwangcoil.co.kr/7850
 $ENDCMP
 #
-$CMP SIP-7_P2.54mm
-D Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)
-K connector
-F .\Dataseets\12505-NN.pdf
-$ENDCMP
-#
 $CMP SMBJ15A
 D Bidirectional transient-voltage-suppression diode, filled shape
 K diode TVS thyrector
@@ -259,6 +312,24 @@ $CMP WR106SR-W
 D Light emitting diode
 K LED diode
 F .\Dataseets\WR106SR-W.pdf
+$ENDCMP
+#
+$CMP Y_32MHz
+D Two pin crystal
+K quartz ceramic resonator oscillator
+F .\Dataseets\ECX_1637B-1649431.pdf
+$ENDCMP
+#
+$CMP nRF52832-QFAA
+D Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN-48
+K MCU, ARM, BLE, 2.4GHz
+F http://infocenter.nordicsemi.com/pdf/nRF52832_PS_v1.4.pdf
+$ENDCMP
+#
+$CMP nRF52832_DM-SModule
+D Multiprotocol BLE/2.4GHz Cortex-M4 SoC, QFN-48
+K MCU, ARM, BLE, 2.4GHz
+F http://infocenter.nordicsemi.com/pdf/nRF52832_DM-S_REV1R2.pdf
 $ENDCMP
 #
 #End Doc Library
