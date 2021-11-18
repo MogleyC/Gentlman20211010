@@ -1,6 +1,6 @@
 (sym_lib_table
   (lib (name Custom)(type Legacy)(uri ${KIPRJMOD}/Lib/Custom/Custom.lib)(options "")(descr ""))
-  (lib (name STM32G070RBT6)(type Legacy)(uri ${KIPRJMOD}/Lib/STM32G070RBT6/STM32G070RBT6.lib)(options "")(descr ""))
+  (lib (name STM32G070RBT6)(type Legacy)(uri ${KIPRJMOD}/Lib/STM32G070RBT6/STM32G070RBT6.lib)(options "")(descr "")(disabled))
   (lib (name dk_Addressable-Specialty)(type Legacy)(uri ${KIPRJMOD}/Lib/digikey-kicad-library-master/digikey-symbols/dk_Addressable-Specialty.lib)(options "")(descr ""))
   (lib (name dk_Alarms-Buzzers-and-Sirens)(type Legacy)(uri ${KIPRJMOD}/Lib/digikey-kicad-library-master/digikey-symbols/dk_Alarms-Buzzers-and-Sirens.lib)(options "")(descr ""))
   (lib (name dk_Automotive-Relays)(type Legacy)(uri ${KIPRJMOD}/Lib/digikey-kicad-library-master/digikey-symbols/dk_Automotive-Relays.lib)(options "")(descr ""))

@@ -10,28 +10,50 @@ D Power symbol creates a global label with name "+5V"
 K power-flag
 $ENDCMP
 #
+$CMP 12505WR-02
+D Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F .\Dataseets\12505-NN.pdf
+$ENDCMP
+#
+$CMP 12505WS-08
+D Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F .\Dataseets\12505-NN.pdf
+$ENDCMP
+#
+$CMP 12505WS-09
+D Generic connector, single row, 01x09, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F .\Dataseets\12505-NN.pdf
+$ENDCMP
+#
 $CMP 2N5401S
 D PNP transistor, base/emitter/collector
 K transistor PNP
-F ~
+F .\Dataseets\2N5401S.pdf
 $ENDCMP
 #
 $CMP 2N5551S
 D NPN transistor, base/emitter/collector
 K transistor NPN
-F ~
+F .\Dataseets\2N5550_1S_Ver2.pdf
 $ENDCMP
 #
 $CMP 2SA1981SY
 D PNP transistor, base/emitter/collector
 K transistor PNP
-F ~
+F .\Dataseets\AUKCS02423-1.pdf
+$ENDCMP
+#
+$CMP AP4890
+F .\Dataseets\aP4890K_DataSheet.pdf
 $ENDCMP
 #
 $CMP BL-HBHG8JE36K-TRB-T05
 D RGB LED, anode/red/green/blue
 K LED RGB diode
-F ~
+F .\Dataseets\BL-HBHG8JE36K-TRB-T05(3color).pdf
 $ENDCMP
 #
 $CMP CAP_101K_250V_2012
@@ -40,6 +62,7 @@ $ENDCMP
 #
 $CMP CAP_103K_250V_3216
 K Cap Capacitor 1608
+F .\Dataseets\TCC1206X7R103K251DT_10nF_250V_K.pdf
 $ENDCMP
 #
 $CMP CAP_103K_25V_1608
@@ -48,14 +71,17 @@ $ENDCMP
 #
 $CMP CAP_104Z_25V_1608
 K Cap Capacitor 1608
+F ~
 $ENDCMP
 #
 $CMP CAP_105K_250V_4532
 K Cap Capacitor 1608
+F .\Dataseets\FS43X105K251EGG_1uF_250V_K.pdf
 $ENDCMP
 #
 $CMP CAP_105Z_6.3V_1608
 K Cap Capacitor 1608
+F ~
 $ENDCMP
 #
 $CMP CAP_220uF_6.3V_SC6.3X5.8
@@ -64,45 +90,22 @@ K cap capacitor
 F ~
 $ENDCMP
 #
-$CMP Conn_01x02
-D Generic connector, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)
-K connector
-F ~
-$ENDCMP
-#
-$CMP Conn_01x07
-D Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)
-K connector
-F ~
-$ENDCMP
-#
-$CMP Conn_01x08
-D Generic connector, single row, 01x08, script generated (kicad-library-utils/schlib/autogen/connector/)
-K connector
-F ~
-$ENDCMP
-#
-$CMP Conn_01x09
-D Generic connector, single row, 01x09, script generated (kicad-library-utils/schlib/autogen/connector/)
-K connector
-F ~
-$ENDCMP
-#
 $CMP FDT86246L
 D N-MOSFET transistor, gate/drain/source
 K transistor NMOS N-MOS N-MOSFET
-F ~
+F .\Dataseets\FDT86246L-D.pdf
 $ENDCMP
 #
 $CMP LMT117-ADJ
 D 1A Low Dropout regulator, positive, adjustable output, SOT-223
 K linear regulator ldo adjustable positive obsolete
-F http://www.diodes.com/datasheets/AP1117.pdf
+F .\Dataseets\AX1117_LMT117-ADJ.pdf
 $ENDCMP
 #
 $CMP MBRAF3200T3G
 D 20V 1A Schottky Barrier Rectifier Diode, SMA(DO-214AC)
 K diode Schottky
+F .\Dataseets\MBRAF3200T3_D-2315037.pdf
 $ENDCMP
 #
 $CMP R_0RJ_6432
@@ -204,13 +207,24 @@ $ENDCMP
 $CMP SC7850D-221K
 D Inductor, small symbol
 K inductor choke coil reactor magnetic
-F ~
+F http://seokwangcoil.co.kr/7850
+$ENDCMP
+#
+$CMP SIP-7_P2.54mm
+D Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)
+K connector
+F .\Dataseets\12505-NN.pdf
 $ENDCMP
 #
 $CMP SMBJ15A
 D Bidirectional transient-voltage-suppression diode, filled shape
 K diode TVS thyrector
-F ~
+F .\Dataseets\SMBJ.pdf
+$ENDCMP
+#
+$CMP STM32G070RBT6
+D ARM Cortex-M0 MCU, 128KB flash, 16KB RAM, 48MHz, 2.4-3.6V, 51 GPIO, LQFP-64
+F http://www.st.com/st-web-ui/static/active/en/resource/technical/document/datasheet/DM00141386.pdf
 $ENDCMP
 #
 $CMP SW_Push
@@ -228,13 +242,11 @@ $ENDCMP
 $CMP USB-TYPE-C-31-M-17
 D USB 2.0-only Type-C Plug connector
 K usb universal serial bus type-C USB2.0
-F https://www.usb.org/sites/default/files/documents/usb_type-c.zip
+F .\Dataseets\Korean-Hroparts-Elec-TYPE-C-31-M-17.pdf
 $ENDCMP
 #
-$CMP W25Q128JVS
-D 128Mb Serial Flash Memory, Standard/Dual/Quad SPI, SOIC-8
-K flash memory SPI QPI DTR
-F http://www.winbond.com/resource-files/w25q128jv_dtr%20revc%2003272018%20plus.pdf
+$CMP VLN1MM04S8X
+F .\Dataseets\VLN1MxxS V1.40 series Data Sheet.pdf
 $ENDCMP
 #
 $CMP W25Q32JVSS
@@ -246,7 +258,7 @@ $ENDCMP
 $CMP WR106SR-W
 D Light emitting diode
 K LED diode
-F ~
+F .\Dataseets\WR106SR-W.pdf
 $ENDCMP
 #
 #End Doc Library
