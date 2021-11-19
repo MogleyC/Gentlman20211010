@@ -455,15 +455,13 @@ Connection ~ 2300 3150
 Wire Wire Line
 	2300 3550 2050 3550
 Connection ~ 2300 3550
-Text GLabel 2200 4150 0    50   Input ~ 0
-nRF_SWCLK
 Wire Wire Line
 	2200 4150 3250 4150
-Text GLabel 2200 4250 0    50   Input ~ 0
+Text GLabel 2200 4250 0    50   BiDi ~ 0
 nRF_SWDIO
 Wire Wire Line
 	2200 4250 3250 4250
-Text GLabel 2200 4350 0    50   Input ~ 0
+Text GLabel 2200 4350 0    50   Output ~ 0
 nRF_UART_TX
 Wire Wire Line
 	2200 4350 3250 4350
@@ -611,10 +609,10 @@ DEC4
 Wire Wire Line
 	7100 2650 7500 2650
 Wire Wire Line
-	1300 7350 1450 7350
-Text GLabel 1450 7350 2    50   Input ~ 0
+	2450 6850 2750 6850
+Text GLabel 2750 6850 2    50   Input ~ 0
 DEC4
-NoConn ~ 1300 7350
+NoConn ~ 2450 6850
 NoConn ~ 5050 2350
 NoConn ~ 5050 2450
 NoConn ~ 5050 2550
@@ -739,16 +737,21 @@ Wire Wire Line
 	1650 1550 2150 1550
 Wire Wire Line
 	1650 1650 2150 1650
-Text GLabel 2350 7050 2    50   Output ~ 0
+Text GLabel 2750 6550 2    50   Input ~ 0
 nRF_UART_TX
-Text GLabel 2350 7150 2    50   Output ~ 0
+Text GLabel 2750 6650 2    50   Output ~ 0
 nRF_UART_RX
-Text GLabel 1700 7150 0    50   Output ~ 0
-STM32_UART_TX
-Text GLabel 1700 7050 0    50   Output ~ 0
-STM32_UART_RX
+Text GLabel 2450 6550 0    50   BiDi ~ 0
+STM32_UART
 Wire Wire Line
-	1700 7050 2350 7050
+	2450 6550 2600 6550
+Text GLabel 2200 4150 0    50   Input ~ 0
+nRF_SWCLK
 Wire Wire Line
-	1700 7150 2350 7150
+	2600 6550 2600 6650
+Connection ~ 2600 6550
+Wire Wire Line
+	2600 6550 2750 6550
+Wire Wire Line
+	2600 6650 2750 6650
 $EndSCHEMATC

@@ -84,7 +84,7 @@ Wire Wire Line
 Wire Wire Line
 	2050 3000 4850 3000
 Wire Wire Line
-	2050 3100 4850 3100
+	2050 3100 4750 3100
 Wire Wire Line
 	2050 3200 4850 3200
 Text Label 2050 2600 0    50   ~ 0
@@ -2651,4 +2651,13 @@ F 8 "DIP-7" H 1850 2900 50  0001 C CNN "TYPE"
 	1    1850 2900
 	-1   0    0    -1  
 $EndComp
+Text GLabel 4600 3300 0    50   BiDi ~ 0
+STM32_UART
+Wire Wire Line
+	4600 3300 4750 3300
+Wire Wire Line
+	4750 3300 4750 3100
+Connection ~ 4750 3100
+Wire Wire Line
+	4750 3100 4850 3100
 $EndSCHEMATC
