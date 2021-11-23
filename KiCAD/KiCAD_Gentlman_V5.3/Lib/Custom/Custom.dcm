@@ -143,6 +143,18 @@ K linear regulator ldo adjustable positive obsolete
 F .\Dataseets\AX1117_LMT117-ADJ.pdf
 $ENDCMP
 #
+$CMP L_10uH
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F .\Dataseets\JELF243B_0012-1633801.pdf
+$ENDCMP
+#
+$CMP L_15nH
+D Inductor, small symbol
+K inductor choke coil reactor magnetic
+F .\Dataseets\jti-cat-rf-ind-844822.pdf
+$ENDCMP
+#
 $CMP L_3.9nH
 D Inductor, small symbol
 K inductor choke coil reactor magnetic
@@ -164,6 +176,12 @@ $ENDCMP
 $CMP PinHeader2.54mm_7
 D Generic connector, single row, 01x07, script generated (kicad-library-utils/schlib/autogen/connector/)
 K connector
+F ~
+$ENDCMP
+#
+$CMP R_0RJ
+D Resistor symbol for simulation only
+K resistor simulation
 F ~
 $ENDCMP
 #
@@ -284,6 +302,12 @@ $CMP SW_Push
 D Push button switch, generic, two pins
 K switch normally-open pushbutton push-button
 F ~
+$ENDCMP
+#
+$CMP SW_Tact_1105
+D Push button switch, generic, two pins
+K switch normally-open pushbutton push-button
+F https://www.devicemart.co.kr/goods/view?no=34555
 $ENDCMP
 #
 $CMP ULN2003D1013TR

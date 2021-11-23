@@ -624,6 +624,66 @@ X VI 3 -300 0 100 R 50 50 1 1 W
 ENDDRAW
 ENDDEF
 #
+# Custom_L_10uH
+#
+DEF Custom_L_10uH L 0 10 N N 1 F N
+F0 "L" 30 40 50 H V L CNN
+F1 "Custom_L_10uH" 30 -40 50 H I L CNN
+F2 "Custom:L_0603_1608Metric" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "10uH/50mA/±20%" 30 -50 50 H V L CNN
+F5 "SMD INDUCTOR" 0 0 50 H I C CNN "Description"
+F6 "10uH/50mA/±20%" 0 0 50 H I C CNN "Comment"
+F7 "0603" 0 0 50 H I C CNN "TYPE"
+F8 "MURATA" 0 0 50 H I C CNN "MAKER"
+F9 "LQM18FN100M00D" 0 0 50 H I C CNN "PartName"
+F10 "https://kr.mouser.com/ProductDetail/Murata/LQM18FN100M00D?qs=sGAEpiMZZMvxX9Q80wbhCb2WlNhDJeZC" 0 0 50 H I C CNN "Shop"
+$FPLIST
+ Choke_*
+ *Coil*
+ Inductor_*
+ L_*
+$ENDFPLIST
+DRAW
+A 0 -60 20 -899 899 0 1 0 N 0 -80 0 -40
+A 0 -20 20 -899 899 0 1 0 N 0 -40 0 0
+A 0 20 20 -899 899 0 1 0 N 0 0 0 40
+A 0 60 20 -899 899 0 1 0 N 0 40 0 80
+X ~ 1 0 100 20 D 50 50 1 1 P
+X ~ 2 0 -100 20 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
+# Custom_L_15nH
+#
+DEF Custom_L_15nH L 0 10 N N 1 F N
+F0 "L" 30 40 50 H V L CNN
+F1 "Custom_L_15nH" 30 -40 50 H I L CNN
+F2 "Custom:L_01005_0402Metric" 0 0 50 H I C CNN
+F3 "" 0 0 50 H I C CNN
+F4 "15nH/SHF2.45Ghz/±10%" 30 -50 50 H V L CNN
+F5 "SMD INDUCTOR" 0 0 50 H I C CNN "Description"
+F6 "15nH/SHF21Ghz/±10%" 0 0 50 H I C CNN "Comment"
+F7 "1005" 0 0 50 H I C CNN "TYPE"
+F8 "JOHANSON" 0 0 50 H I C CNN "MAKER"
+F9 "L-07C15NKV6T" 0 0 50 H I C CNN "PartName"
+F10 "https://kr.mouser.com/ProductDetail/Johanson/L-07C15NKV6T?qs=sGAEpiMZZMsjJi7B1kCaqYmWy2J2VjPA6p6zKg5MyIw%3D" 0 0 50 H I C CNN "Shop"
+$FPLIST
+ Choke_*
+ *Coil*
+ Inductor_*
+ L_*
+$ENDFPLIST
+DRAW
+A 0 -60 20 -899 899 0 1 0 N 0 -80 0 -40
+A 0 -20 20 -899 899 0 1 0 N 0 -40 0 0
+A 0 20 20 -899 899 0 1 0 N 0 0 0 40
+A 0 60 20 -899 899 0 1 0 N 0 40 0 80
+X ~ 1 0 100 20 D 50 50 1 1 P
+X ~ 2 0 -100 20 U 50 50 1 1 P
+ENDDRAW
+ENDDEF
+#
 # Custom_L_3.9nH
 #
 DEF Custom_L_3.9nH L 0 10 N N 1 F N
