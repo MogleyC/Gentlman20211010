@@ -1,4 +1,4 @@
-(module SOIC-8_5.23x5.23mm_P1.27mm (layer F.Cu) (tedit 61947B48)
+(module SOIC-8_5.23x5.23mm_P1.27mm (layer F.Cu) (tedit 61BC6C04)
   (descr "SOIC, 8 Pin (http://www.winbond.com/resource-files/w25q32jv%20revg%2003272018%20plus.pdf#page=68), generated with kicad-footprint-generator ipc_gullwing_generator.py")
   (tags "SOIC SO")
   (attr smd)
@@ -8,6 +8,7 @@
   (fp_text value SOIC-8_5.23x5.23mm_P1.27mm (at 0 3.56) (layer F.Fab)
     (effects (font (size 1 1) (thickness 0.15)))
   )
+  (fp_circle (center -4.15 -2.9) (end -3.9 -2.9) (layer F.SilkS) (width 0.2))
   (fp_line (start 4.65 -2.86) (end -4.65 -2.86) (layer F.CrtYd) (width 0.05))
   (fp_line (start 4.65 2.86) (end 4.65 -2.86) (layer F.CrtYd) (width 0.05))
   (fp_line (start -4.65 2.86) (end 4.65 2.86) (layer F.CrtYd) (width 0.05))

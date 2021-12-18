@@ -117,8 +117,6 @@ F 8 "SMD INDUCTOR" H 2650 2400 50  0001 C CNN "Type"
 	1    2650 2400
 	0    -1   -1   0   
 $EndComp
-Text GLabel 2600 4550 0    50   Input ~ 0
-nRF_SWCLK
 Wire Wire Line
 	1250 1950 1750 1950
 Wire Wire Line
@@ -226,14 +224,6 @@ NoConn ~ 4650 2950
 NoConn ~ 4650 2850
 NoConn ~ 4650 2750
 Wire Wire Line
-	5650 4850 5900 4850
-Text GLabel 5650 4850 0    50   Input ~ 0
-UART
-Wire Wire Line
-	5650 4750 5900 4750
-Text GLabel 5650 4750 0    50   Input ~ 0
-UART
-Wire Wire Line
 	5650 4650 5900 4650
 Text GLabel 5650 4650 0    50   Input ~ 0
 nRF_SWDIO
@@ -318,35 +308,15 @@ F 8 "SMD INDUCTOR" H 2300 5450 50  0001 C CNN "Type"
 	1    2300 5450
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	2600 4850 2850 4850
-Text GLabel 2600 4850 0    50   Input ~ 0
-UART
-Wire Wire Line
-	2600 4750 2850 4750
-Text GLabel 2600 4750 0    50   Output ~ 0
-UART
-Wire Wire Line
-	2600 4650 2850 4650
-Text GLabel 2600 4650 0    50   BiDi ~ 0
-nRF_SWDIO
-Wire Wire Line
-	2600 4550 2850 4550
-Connection ~ 1900 3950
-Wire Wire Line
-	1900 3950 1650 3950
-Connection ~ 1900 3550
-Wire Wire Line
-	1650 3550 1900 3550
 Connection ~ 1250 3950
 Wire Wire Line
-	1250 3550 1250 3950
+	1250 3550 1250 3750
 Wire Wire Line
 	1450 3550 1250 3550
 Wire Wire Line
 	1250 3950 1450 3950
 Wire Wire Line
-	1250 4150 1250 3950
+	1250 4150 1250 4100
 $Comp
 L power:GNDPWR #PWR?
 U 1 1 61A513E3
@@ -392,14 +362,6 @@ F 8 "CHIP CERAMIC CAP" H 1550 3550 50  0001 C CNN "Type"
 	1    1550 3550
 	0    1    1    0   
 $EndComp
-Wire Wire Line
-	1900 3950 2850 3950
-Wire Wire Line
-	1900 3900 1900 3950
-Wire Wire Line
-	1900 3550 2850 3550
-Wire Wire Line
-	1900 3600 1900 3550
 Wire Wire Line
 	1850 3050 2050 3050
 Wire Wire Line
@@ -557,14 +519,14 @@ Connection ~ 3950 1800
 $Comp
 L Custom:+3.6V #PWR?
 U 1 1 61A0FB56
-P 3950 850
+P 3950 1250
 AR Path="/616E62D0/61A0FB56" Ref="#PWR?"  Part="1" 
 AR Path="/61979BEC/61A0FB56" Ref="#PWR04"  Part="1" 
-F 0 "#PWR04" H 3950 700 50  0001 C CNN
-F 1 "+3.6V" H 3965 1023 50  0000 C CNN
-F 2 "" H 3950 850 50  0001 C CNN
-F 3 "" H 3950 850 50  0001 C CNN
-	1    3950 850 
+F 0 "#PWR04" H 3950 1100 50  0001 C CNN
+F 1 "+3.6V" H 3965 1423 50  0000 C CNN
+F 2 "" H 3950 1250 50  0001 C CNN
+F 3 "" H 3950 1250 50  0001 C CNN
+	1    3950 1250
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -693,22 +655,6 @@ F 7 "SMD MCU" H 3750 4250 50  0001 C CNN "Type"
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	8750 4850 9000 4850
-Text GLabel 8750 4850 0    50   Input ~ 0
-UART
-Wire Wire Line
-	8750 4750 9000 4750
-Text GLabel 8750 4750 0    50   Input ~ 0
-UART
-Wire Wire Line
-	8750 4650 9000 4650
-Text GLabel 8750 4650 0    50   Input ~ 0
-nRF_SWDIO
-Wire Wire Line
-	8750 4550 9000 4550
-Text GLabel 8750 4550 0    50   Input ~ 0
-nRF_SWCLK
-Wire Wire Line
 	9900 6250 9900 6150
 $Comp
 L power:GNDPWR #PWR?
@@ -834,21 +780,8 @@ NoConn ~ 10800 5550
 NoConn ~ 10800 5650
 NoConn ~ 10800 5750
 NoConn ~ 10800 5850
-$Comp
-L Custom:PinHeader2.54mm-2-Jumper JP1
-U 1 1 61AEA02E
-P 3950 1250
-F 0 "JP1" V 3904 1377 50  0000 L CNN
-F 1 "PinHeader2.54mm-2-Jumper" V 3995 1377 50  0000 L CNN
-F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 3950 1250 50  0001 C CNN
-F 3 "~" H 3950 1250 50  0001 C CNN
-F 4 "PinHeader2.54mm-2-Jumper" H 3950 1250 50  0001 C CNN "PartName"
-F 5 "PIN HEADER" H 3950 1250 50  0001 C CNN "Type"
-	1    3950 1250
-	0    1    1    0   
-$EndComp
 Wire Wire Line
-	3950 850  3950 950 
+	3950 1250 3950 1350
 Wire Wire Line
 	3950 1550 3950 1650
 Wire Wire Line
@@ -866,61 +799,61 @@ Connection ~ 3750 1650
 $Comp
 L Custom:+3.6V #PWR?
 U 1 1 61B092EB
-P 6800 850
+P 6800 1250
 AR Path="/616E62D0/61B092EB" Ref="#PWR?"  Part="1" 
 AR Path="/61979BEC/61B092EB" Ref="#PWR02"  Part="1" 
-F 0 "#PWR02" H 6800 700 50  0001 C CNN
-F 1 "+3.6V" H 6815 1023 50  0000 C CNN
-F 2 "" H 6800 850 50  0001 C CNN
-F 3 "" H 6800 850 50  0001 C CNN
-	1    6800 850 
+F 0 "#PWR02" H 6800 1100 50  0001 C CNN
+F 1 "+3.6V" H 6815 1423 50  0000 C CNN
+F 2 "" H 6800 1250 50  0001 C CNN
+F 3 "" H 6800 1250 50  0001 C CNN
+	1    6800 1250
 	1    0    0    -1  
 $EndComp
 $Comp
 L Custom:PinHeader2.54mm-2-Jumper JP2
 U 1 1 61B092F4
-P 6800 1250
-F 0 "JP2" V 6754 1377 50  0000 L CNN
-F 1 "PinHeader2.54mm-2-Jumper" V 6845 1377 50  0000 L CNN
-F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 6800 1250 50  0001 C CNN
-F 3 "~" H 6800 1250 50  0001 C CNN
-F 4 "PinHeader2.54mm-2-Jumper" H 6800 1250 50  0001 C CNN "PartName"
-F 5 "PIN HEADER" H 6800 1250 50  0001 C CNN "Type"
-	1    6800 1250
-	0    1    1    0   
+P 6800 1450
+F 0 "JP2" V 6750 1400 50  0000 R CNN
+F 1 "PinHeader2.54mm-2-Jumper" V 6850 1400 50  0000 R CNN
+F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 6800 1450 50  0001 C CNN
+F 3 "~" H 6800 1450 50  0001 C CNN
+F 4 "PinHeader2.54mm-2-Jumper" H 6800 1450 50  0001 C CNN "PartName"
+F 5 "PIN HEADER" H 6800 1450 50  0001 C CNN "Type"
+	1    6800 1450
+	0    -1   1    0   
 $EndComp
 Wire Wire Line
-	6800 850  6800 950 
+	6800 1250 6800 1350
 Wire Wire Line
 	6800 1550 6800 2550
 $Comp
 L Custom:+3.6V #PWR?
 U 1 1 61B13835
-P 9900 850
+P 9900 1250
 AR Path="/616E62D0/61B13835" Ref="#PWR?"  Part="1" 
 AR Path="/61979BEC/61B13835" Ref="#PWR03"  Part="1" 
-F 0 "#PWR03" H 9900 700 50  0001 C CNN
-F 1 "+3.6V" H 9915 1023 50  0000 C CNN
-F 2 "" H 9900 850 50  0001 C CNN
-F 3 "" H 9900 850 50  0001 C CNN
-	1    9900 850 
+F 0 "#PWR03" H 9900 1100 50  0001 C CNN
+F 1 "+3.6V" H 9915 1423 50  0000 C CNN
+F 2 "" H 9900 1250 50  0001 C CNN
+F 3 "" H 9900 1250 50  0001 C CNN
+	1    9900 1250
 	1    0    0    -1  
 $EndComp
 $Comp
 L Custom:PinHeader2.54mm-2-Jumper JP3
 U 1 1 61B1383E
-P 9900 1250
-F 0 "JP3" V 9854 1377 50  0000 L CNN
-F 1 "PinHeader2.54mm-2-Jumper" V 9945 1377 50  0000 L CNN
-F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 9900 1250 50  0001 C CNN
-F 3 "~" H 9900 1250 50  0001 C CNN
-F 4 "PinHeader2.54mm-2-Jumper" H 9900 1250 50  0001 C CNN "PartName"
-F 5 "PIN HEADER" H 9900 1250 50  0001 C CNN "Type"
-	1    9900 1250
-	0    1    1    0   
+P 9900 1450
+F 0 "JP3" V 9850 1400 50  0000 R CNN
+F 1 "PinHeader2.54mm-2-Jumper" V 9950 1400 50  0000 R CNN
+F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 9900 1450 50  0001 C CNN
+F 3 "~" H 9900 1450 50  0001 C CNN
+F 4 "PinHeader2.54mm-2-Jumper" H 9900 1450 50  0001 C CNN "PartName"
+F 5 "PIN HEADER" H 9900 1450 50  0001 C CNN "Type"
+	1    9900 1450
+	0    -1   1    0   
 $EndComp
 Wire Wire Line
-	9900 850  9900 950 
+	9900 1250 9900 1350
 Wire Wire Line
 	9900 1550 9900 2550
 $Comp
@@ -940,14 +873,209 @@ F 8 "CHIP CERAMIC CAP" H 2600 5800 50  0001 C CNN "Type"
 	1    0    0    -1  
 $EndComp
 $Comp
+L Custom:PinHeader2.54mm-2-Jumper JP1
+U 1 1 61AEA02E
+P 3950 1450
+F 0 "JP1" V 3900 1400 50  0000 R CNN
+F 1 "PinHeader2.54mm-2-Jumper" V 4000 1400 50  0000 R CNN
+F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 3950 1450 50  0001 C CNN
+F 3 "~" H 3950 1450 50  0001 C CNN
+F 4 "PinHeader2.54mm-2-Jumper" H 3950 1450 50  0001 C CNN "PartName"
+F 5 "PIN HEADER" H 3950 1450 50  0001 C CNN "Type"
+	1    3950 1450
+	0    -1   1    0   
+$EndComp
+Text GLabel 5150 4900 0    50   BiDi ~ 0
+UART
+$Comp
+L Custom:PinHeader2.54mm-2-Jumper JP6
+U 1 1 61D3FDB4
+P 5450 4800
+F 0 "JP6" H 5200 4850 50  0000 L CNN
+F 1 "PinHeader2.54mm-2-Jumper" H 5450 4725 50  0001 C CNN
+F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 5450 4800 50  0001 C CNN
+F 3 "~" H 5450 4800 50  0001 C CNN
+F 4 "PinHeader2.54mm-2-Jumper" H 5450 4800 50  0001 C CNN "PartName"
+F 5 "PIN HEADER" H 5450 4800 50  0001 C CNN "Type"
+	1    5450 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom:PinHeader2.54mm-2-Jumper JP7
+U 1 1 61D3FDBC
+P 5450 4900
+F 0 "JP7" H 5200 4950 50  0000 L CNN
+F 1 "PinHeader2.54mm-2-Jumper" H 5450 4825 50  0001 C CNN
+F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 5450 4900 50  0001 C CNN
+F 3 "~" H 5450 4900 50  0001 C CNN
+F 4 "PinHeader2.54mm-2-Jumper" H 5450 4900 50  0001 C CNN "PartName"
+F 5 "PIN HEADER" H 5450 4900 50  0001 C CNN "Type"
+	1    5450 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5150 4900 5200 4900
+Wire Wire Line
+	5200 4800 5200 4900
+Wire Wire Line
+	5200 4800 5350 4800
+Connection ~ 5200 4900
+Wire Wire Line
+	5200 4900 5350 4900
+Wire Wire Line
+	5550 4800 5700 4800
+Wire Wire Line
+	5700 4800 5700 4750
+Wire Wire Line
+	5700 4750 5900 4750
+Wire Wire Line
+	5550 4900 5700 4900
+Wire Wire Line
+	5700 4900 5700 4850
+Wire Wire Line
+	5700 4850 5900 4850
+Wire Wire Line
+	2600 4650 2850 4650
+Text GLabel 2600 4650 0    50   Input ~ 0
+nRF_SWDIO
+Wire Wire Line
+	2600 4550 2850 4550
+Text GLabel 2600 4550 0    50   Input ~ 0
+nRF_SWCLK
+Text GLabel 2100 4900 0    50   BiDi ~ 0
+UART
+$Comp
+L Custom:PinHeader2.54mm-2-Jumper JP4
+U 1 1 61D72208
+P 2400 4800
+F 0 "JP4" H 2150 4850 50  0000 L CNN
+F 1 "PinHeader2.54mm-2-Jumper" H 2400 4725 50  0001 C CNN
+F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 2400 4800 50  0001 C CNN
+F 3 "~" H 2400 4800 50  0001 C CNN
+F 4 "PinHeader2.54mm-2-Jumper" H 2400 4800 50  0001 C CNN "PartName"
+F 5 "PIN HEADER" H 2400 4800 50  0001 C CNN "Type"
+	1    2400 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom:PinHeader2.54mm-2-Jumper JP5
+U 1 1 61D72210
+P 2400 4900
+F 0 "JP5" H 2150 4950 50  0000 L CNN
+F 1 "PinHeader2.54mm-2-Jumper" H 2400 4825 50  0001 C CNN
+F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 2400 4900 50  0001 C CNN
+F 3 "~" H 2400 4900 50  0001 C CNN
+F 4 "PinHeader2.54mm-2-Jumper" H 2400 4900 50  0001 C CNN "PartName"
+F 5 "PIN HEADER" H 2400 4900 50  0001 C CNN "Type"
+	1    2400 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2100 4900 2150 4900
+Wire Wire Line
+	2150 4800 2150 4900
+Wire Wire Line
+	2150 4800 2300 4800
+Connection ~ 2150 4900
+Wire Wire Line
+	2150 4900 2300 4900
+Wire Wire Line
+	2500 4800 2650 4800
+Wire Wire Line
+	2650 4800 2650 4750
+Wire Wire Line
+	2650 4750 2850 4750
+Wire Wire Line
+	2500 4900 2650 4900
+Wire Wire Line
+	2650 4900 2650 4850
+Wire Wire Line
+	2650 4850 2850 4850
+Wire Wire Line
+	8750 4650 9000 4650
+Text GLabel 8750 4650 0    50   Input ~ 0
+nRF_SWDIO
+Wire Wire Line
+	8750 4550 9000 4550
+Text GLabel 8750 4550 0    50   Input ~ 0
+nRF_SWCLK
+Text GLabel 8250 4900 0    50   BiDi ~ 0
+UART
+$Comp
+L Custom:PinHeader2.54mm-2-Jumper JP8
+U 1 1 61D7A940
+P 8550 4800
+F 0 "JP8" H 8300 4850 50  0000 L CNN
+F 1 "PinHeader2.54mm-2-Jumper" H 8550 4725 50  0001 C CNN
+F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 8550 4800 50  0001 C CNN
+F 3 "~" H 8550 4800 50  0001 C CNN
+F 4 "PinHeader2.54mm-2-Jumper" H 8550 4800 50  0001 C CNN "PartName"
+F 5 "PIN HEADER" H 8550 4800 50  0001 C CNN "Type"
+	1    8550 4800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Custom:PinHeader2.54mm-2-Jumper JP9
+U 1 1 61D7A948
+P 8550 4900
+F 0 "JP9" H 8300 4950 50  0000 L CNN
+F 1 "PinHeader2.54mm-2-Jumper" H 8550 4825 50  0001 C CNN
+F 2 "Custom:PinHeader_1x02_P2.54mm_Vertical" H 8550 4900 50  0001 C CNN
+F 3 "~" H 8550 4900 50  0001 C CNN
+F 4 "PinHeader2.54mm-2-Jumper" H 8550 4900 50  0001 C CNN "PartName"
+F 5 "PIN HEADER" H 8550 4900 50  0001 C CNN "Type"
+	1    8550 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	8250 4900 8300 4900
+Wire Wire Line
+	8300 4800 8300 4900
+Wire Wire Line
+	8300 4800 8450 4800
+Connection ~ 8300 4900
+Wire Wire Line
+	8300 4900 8450 4900
+Wire Wire Line
+	8650 4800 8800 4800
+Wire Wire Line
+	8800 4800 8800 4750
+Wire Wire Line
+	8800 4750 9000 4750
+Wire Wire Line
+	8650 4900 8800 4900
+Wire Wire Line
+	8800 4900 8800 4850
+Wire Wire Line
+	8800 4850 9000 4850
+Wire Wire Line
+	1650 3550 1900 3550
+Wire Wire Line
+	1650 3950 1900 3950
+Wire Wire Line
+	1900 3850 1900 3950
+Connection ~ 1900 3950
+Wire Wire Line
+	1900 3950 2850 3950
+Wire Wire Line
+	1900 3650 1900 3550
+Connection ~ 1900 3550
+Wire Wire Line
+	1900 3550 2850 3550
+Connection ~ 1250 3750
+Wire Wire Line
+	1250 3750 1250 3950
+Wire Wire Line
+	1800 3750 1250 3750
+$Comp
 L Custom:Y_32MHz Y1
 U 1 1 61A44AEB
 P 1900 3750
-F 0 "Y1" V 1925 3875 50  0000 L CNN
+F 0 "Y1" V 2000 3750 50  0000 L CNN
 F 1 "Y_32MHz" H 1900 3600 50  0001 C CNN
 F 2 "Custom:Crystal_SMD_2016-4Pin_2.0x1.6mm" H 1900 3750 50  0001 C CNN
 F 3 ".\\Dataseets\\Replacement\\2103291134_Yangxing-Tech-X201632MKD4SI_C108165.pdf" H 1900 3750 50  0001 C CNN
-F 4 "32MHz/Cl:8pF/±40ppm" V 1850 3875 50  0000 L CNN "PartName"
+F 4 "32MHz/Cl:8pF/±40ppm" V 2000 3850 50  0000 L CNN "PartName"
 F 5 "https://www.eleparts.co.kr/goods/view?no=6614084" H 1900 3750 50  0001 C CNN "Shop"
 F 6 "X201632MKD4SI" H 1900 3750 50  0001 C CNN "Replacement"
 F 7 "SMD CRYSTAL" H 1900 3750 50  0001 C CNN "Type"
@@ -955,4 +1083,13 @@ F 8 "Yangxing Tech" H 1900 3750 50  0001 C CNN "Maker"
 	1    1900 3750
 	0    1    -1   0   
 $EndComp
+Wire Wire Line
+	2000 3750 2200 3750
+Wire Wire Line
+	2200 3750 2200 4100
+Wire Wire Line
+	2200 4100 1250 4100
+Connection ~ 1250 4100
+Wire Wire Line
+	1250 4100 1250 3950
 $EndSCHEMATC
