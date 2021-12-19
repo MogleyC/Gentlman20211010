@@ -5,8 +5,7 @@
 #include <string.h>
 
 #include "board_config.h"
-#include "nrf52.h"
-#include "nrf52_bitfields.h"
+#include "nrf.h"
 
 #include "Module_Uart.h"
 #include "nrf_drv_gpiote.h"

@@ -1,7 +1,6 @@
 #include "Module_Ble_Uart.h"
 
-//#include "nrf52.h"
-//#include "nrf52_bitfields.h"
+//#include "nrf.h"
 
 #include "Module_Ble.h"
 

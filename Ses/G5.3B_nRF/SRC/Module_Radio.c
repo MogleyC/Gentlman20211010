@@ -5,8 +5,7 @@
 //#include <string.h>
 
 #include "board_config.h"
-#include "nrf52.h"
-#include "nrf52_bitfields.h"
+#include "nrf.h"
 
 #include "radio_config.h"
 //#include "Module_Uart.h"

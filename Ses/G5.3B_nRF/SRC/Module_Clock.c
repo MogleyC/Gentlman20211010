@@ -1,7 +1,6 @@
 #include "Module_Clock.h"
 
-#include "nrf52.h"
-#include "nrf52_bitfields.h"
+#include "nrf.h"
 
 #include "nrf_drv_clock.h"
 #include "app_error.h"

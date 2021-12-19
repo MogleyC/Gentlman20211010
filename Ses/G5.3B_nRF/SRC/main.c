@@ -1,8 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-//#include "nrf52.h"
-//#include "nrf52_bitfields.h"
+//#include "nrf.h"
 
 #include "nrf_delay.h"
 #include "nrf_drv_systick.h"

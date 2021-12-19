@@ -1,7 +1,6 @@
 #include "Module_GPIO.h"
 
-#include "nrf52.h"
-#include "nrf52_bitfields.h"
+#include "nrf.h"
 
 
 void gpio_output_init(uint8_t pin_num, uint8_t SetOpenDrain)
