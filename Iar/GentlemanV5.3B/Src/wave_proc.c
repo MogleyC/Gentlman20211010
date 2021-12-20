@@ -1316,7 +1316,7 @@ void wave_proc_Init(ADC_HandleTypeDef* Set_Frq_hadc, DMA_HandleTypeDef* Set_Frq_
 	NowSetV.AutoOffTimer = 0;
 
 	// Test용
-	PatternSetTestMode();	// TestMode 세팅
+	//PatternSetTestMode();	// TestMode 세팅
 
 	wave_proc_SetStopBase();
 

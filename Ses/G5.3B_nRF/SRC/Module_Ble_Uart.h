@@ -6,13 +6,17 @@ extern "C"
 {
 #endif
 
-void ble_uart_Init();
+#include "ble_nus.h"
 
-void ble_adv_start();
+	void ble_uart_Init(ble_nus_data_handler_t p_nus_data_handler);
 
-void ble_adv_restart();
+	void ble_adv_start();
 
-void ble_uart_ProgressExample();
+	void ble_adv_restart();
+
+	uint32_t ble_uart_data_send(uint8_t * p_data, uint16_t length);
+
+	void ble_uart_ProgressExample();
 
 #ifdef __cplusplus
 }

@@ -18,7 +18,7 @@
 #include "nrf_ble_gatt.h"
 #include "nrf_ble_qwr.h"
 #include "app_timer.h"
-#include "ble_nus.h"
+////#include "ble_nus.h"
 //#include "app_util_platform.h"
 //#include "bsp_btn_ble.h"
 #include "nrf_pwr_mgmt.h"
@@ -104,7 +104,6 @@ static void nrf_qwr_error_handler(uint32_t nrf_error)
 
 static void nus_data_handler(ble_nus_evt_t * p_evt)
 {
-
 	if (p_evt->type == BLE_NUS_EVT_RX_DATA)
 	{
 		uint32_t err_code;
@@ -132,7 +131,7 @@ static void nus_data_handler(ble_nus_evt_t * p_evt)
 }
 
 
-static void services_init(void)
+static void services_init(ble_nus_data_handler_t p_nus_data_handler)
 {
 	uint32_t err_code;
 	ble_nus_init_t nus_init;
@@ -147,7 +146,7 @@ static void services_init(void)
 	// Initialize NUS.
 	memset(&nus_init, 0, sizeof(nus_init));
 
-	nus_init.data_handler = nus_data_handler;
+	nus_init.data_handler = p_nus_data_handler;
 
 	err_code = ble_nus_init(&m_nus, &nus_init);
 	APP_ERROR_CHECK(err_code);
@@ -276,7 +275,7 @@ static void ble_evt_handler(ble_evt_t const * p_ble_evt, void * p_context)
 static void ble_stack_init(void)
 {
 	ret_code_t err_code;
-	
+
 	// Configure the BLE stack using the default settings.
 	// Fetch the start address of the application RAM.
 	uint32_t ram_start = 0;
@@ -340,11 +339,10 @@ void gatt_init(void)
 //	}
 //}
 
-
 // Function for handling app_uart events.
 // This function will receive a single character from the app_uart module and append it to a string.
 // The string will be be sent over BLE when the last character received was a 'new line' '\n' (hex 0x0A) or if the string has reached the maximum data length.
-void uart_event_handle(app_uart_evt_t * p_event)
+static void uart_event_handle(app_uart_evt_t * p_event)
 {
 	static uint8_t data_array[BLE_NUS_MAX_DATA_LEN];
 	static uint8_t index = 0;
@@ -471,25 +469,23 @@ void power_management_init(void)
 //}
 
 
-void ble_uart_Init()
+void ble_uart_Init(ble_nus_data_handler_t p_nus_data_handler)
 {
 	ret_code_t err_code;
-	
+
 	//power_management_init();
-	
-	uart_init(uart_event_handle);
 
 	err_code = app_timer_init();
 	APP_ERROR_CHECK(err_code);
-	
-	
+
+
 	err_code = nrf_sdh_enable_request();
 	APP_ERROR_CHECK(err_code);
 
 	ble_stack_init();
 	gap_params_init();
 	gatt_init();
-	services_init();
+	services_init(p_nus_data_handler);
 	advertising_init();
 	conn_params_init();
 }
@@ -509,9 +505,34 @@ void ble_adv_restart()
 	}
 }
 
+uint32_t ble_uart_data_send(uint8_t * p_data, uint16_t length)
+{
+	uint32_t err_code;
+
+	if (length > 1)
+	{
+		NRF_LOG_DEBUG("Ready to send data over BLE NUS");
+		NRF_LOG_HEXDUMP_DEBUG(p_data, length);
+
+		do
+		{
+			err_code = ble_nus_data_send(&m_nus, p_data, &length, m_conn_handle);
+			if ((err_code != NRF_ERROR_INVALID_STATE) &&
+			    (err_code != NRF_ERROR_RESOURCES) &&
+			    (err_code != NRF_ERROR_NOT_FOUND))
+			{
+				APP_ERROR_CHECK(err_code);
+			}
+		} while (err_code == NRF_ERROR_RESOURCES);
+	}
+
+	return err_code;
+}
+
 void ble_uart_ProgressExample()
 {
-	ble_uart_Init();
+	uart_init(uart_event_handle);
+	ble_uart_Init(nus_data_handler);
 	ble_adv_start();
 
 	while (1)

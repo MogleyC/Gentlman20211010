@@ -6,11 +6,14 @@
 #include "nrf_delay.h"
 #include "nrf_drv_systick.h"
 
+#include "board_config.h"
 #include "Module_Clock.h"
 #include "Module_DebugLog.h"
-#include "Module_GPIO.h"
+#include "Module_Uart.h"
+//#include "Module_GPIO.h"
 #include "Module_Ble_Uart.h"
-#include "board_config.h"
+
+#include "wave_uart.h"
 
 //void in_pin_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action)
 //{
@@ -37,7 +40,8 @@ int main()
 	//gpioe_output_set(LED_2_PIN_NUMBER, false);
 	//gpioe_input_set(BTN_1_PIN_NUMBER, true, 1, NRF_GPIO_PIN_PULLUP, in_pin_handler);
 
-	ble_uart_ProgressExample();
+	//ble_uart_ProgressExample();
+	wave_uart_init();
 
 	while (1) {}
 }

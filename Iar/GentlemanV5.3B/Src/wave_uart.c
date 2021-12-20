@@ -127,11 +127,26 @@ void ProtocolCheck(uint8_t readBuff)
 
 		C_SendDatas,
 		D_SendDatas,
+
+		C_Controll_Stop,
+		D_Controll_Stop,
+
+		C_Controll_LvUp,
+		D_Controll_LvUp,
+
+		C_Controll_LvDw,
+		D_Controll_LvDw,
+
+		C_Controll_ModeUp,
+		D_Controll_ModeUp,
+
+		C_Controll_ModeDw,
+		D_Controll_ModeDw,
 	};
 
 	static uint8_t Protocol_Common[4] = { 0x55, 0x0A, 0x00, 0xFF };
 
-	const static uint8_t Protocol[12] =
+	const static uint8_t Protocol[22] =
 	{
 		0x00,
 		0x50,
@@ -151,6 +166,21 @@ void ProtocolCheck(uint8_t readBuff)
 
 		0x05,
 		0x55,
+
+		0x20,
+		0x70,
+
+		0x21,
+		0x71,
+
+		0x22,
+		0x72,
+
+		0x23,
+		0x73,
+
+		0x24,
+		0x74,
 	};
 
 	enum PC_Step
@@ -214,7 +244,7 @@ void ProtocolCheck(uint8_t readBuff)
 
 
 			IsMatched = false;
-			for (; ProtocolID < 11; ProtocolID++)
+			for (; ProtocolID < 22; ProtocolID++)
 			{
 				if (Protocol[ProtocolID] == rbs[2])
 				{
@@ -364,6 +394,56 @@ void ProtocolCheck(uint8_t readBuff)
 			{
 				UD_ID = 0;
 			}
+
+			break;
+		}
+
+		case C_Controll_Stop:
+		{
+			wave_proc_SetStop();
+
+			Protocol_Common[2] = Protocol[D_Controll_Stop];
+			uart_custom_SendData(Protocol_Common, 4);
+
+			break;
+		}
+
+		case C_Controll_LvUp:
+		{
+			wave_proc_SetLvUp();
+
+			Protocol_Common[2] = Protocol[D_Controll_LvUp];
+			uart_custom_SendData(Protocol_Common, 4);
+
+			break;
+		}
+
+		case C_Controll_LvDw:
+		{
+			wave_proc_SetLvDw();
+
+			Protocol_Common[2] = Protocol[D_Controll_LvDw];
+			uart_custom_SendData(Protocol_Common, 4);
+
+			break;
+		}
+
+		case C_Controll_ModeUp:
+		{
+			wave_proc_SetModeUp();
+
+			Protocol_Common[2] = Protocol[D_Controll_ModeUp];
+			uart_custom_SendData(Protocol_Common, 4);
+
+			break;
+		}
+
+		case C_Controll_ModeDw:
+		{
+			wave_proc_SetModeDw();
+
+			Protocol_Common[2] = Protocol[D_Controll_ModeDw];
+			uart_custom_SendData(Protocol_Common, 4);
 
 			break;
 		}

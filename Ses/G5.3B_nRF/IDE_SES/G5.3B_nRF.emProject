@@ -63,6 +63,7 @@
       <file file_name="$(SrcPath)/Module_DebugLog.c" />
       <file file_name="$(SrcPath)/Module_Ble.c" />
       <file file_name="$(SrcPath)/Module_Ble_Uart.c" />
+	  <file file_name="$(SrcPath)/wave_uart.c" />
     </folder>
     <folder Name="nRF_Drivers">
       <file file_name="$(nRFSdkPath)/modules/nrfx/drivers/src/nrfx_gpiote.c" />
@@ -185,6 +186,7 @@
       <file file_name="$(SrcPath)/Module_DebugLog.c" />
       <file file_name="$(SrcPath)/Module_Ble.c" />
       <file file_name="$(SrcPath)/Module_Ble_Uart.c" />
+	  <file file_name="$(SrcPath)/wave_uart.c" />
     </folder>
     <folder Name="nRF_Drivers">
       <file file_name="$(nRFSdkPath)/modules/nrfx/drivers/src/nrfx_gpiote.c" />

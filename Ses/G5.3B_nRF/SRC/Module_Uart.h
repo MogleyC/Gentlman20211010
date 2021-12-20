@@ -17,6 +17,8 @@ extern "C"
 
 	void uart_put(uint8_t cr);
 
+	void uart_put_arr(uint8_t * cr_arr, uint16_t length);
+
 	void uart_flush();
 
 #ifdef __cplusplus

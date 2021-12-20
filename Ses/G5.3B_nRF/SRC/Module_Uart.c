@@ -46,7 +46,7 @@ void uart_init(void * evtHandle)
 		RTS_PIN_NUMBER,
 		CTS_PIN_NUMBER,
 		SetFlowCtl,
-		false,
+		true,
 #if defined(UART_PRESENT)
 		NRF_UART_BAUDRATE_115200
 #else
@@ -73,6 +73,14 @@ bool uart_get(uint8_t * pcr)
 void uart_put(uint8_t cr)
 {
 	while (app_uart_put(cr) != NRF_SUCCESS) {}
+}
+
+void uart_put_arr(uint8_t * cr_arr, uint16_t length)
+{
+	for (uint16_t i = 0; i < length; ++i)
+	{
+		uart_put(cr_arr[i]);
+	}
 }
 
 void uart_flush()
