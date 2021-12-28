@@ -244,6 +244,14 @@ public class DevicesFragment extends ListFragment {
     private void updateScan(BluetoothDevice device) {
         if(scanState == ScanState.NONE)
             return;
+
+        //이름 기준으로 필터 진행
+        if (device == null
+                || device.getName() == null
+                || !device.getName().contains("PsycheBLE_WaveMask") //특정이름이 포함될것
+                || !device.getName().contains("G5.3B")) //특정 버전정보가 포함될것
+            return;
+
         if(!listItems.contains(device)) {
             listItems.add(device);
             Collections.sort(listItems, DevicesFragment::compareTo);

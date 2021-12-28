@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Simple BLE Terminal</string>
-    <string name="devices">Bluetooth LE Devices</string>
+    <string name="app_name">Psyche Wave Remote</string>
+    <string name="devices">Psyche BLE Devices</string>
 
     <string name="location_permission_title">Location permission required</string>
     <string name="location_permission_message">This app does not use location information, but scanning for Bluetooth LE devices requires this permission</string>
