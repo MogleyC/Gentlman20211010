@@ -1431,7 +1431,7 @@ void wave_proc_SetLvUp()
 
 void wave_proc_SetLvDw()
 {
-	if (NowSetV.Lv > 0)
+	if (NowSetV.Lv > 1)
 	{
 		--NowSetV.Lv;
 		led_SetLevel(NowSetV.Lv);
