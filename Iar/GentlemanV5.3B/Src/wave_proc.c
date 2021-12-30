@@ -65,17 +65,6 @@ typedef union {
 	};
 }FrqIOType;
 
-typedef struct {
-	uint8_t Lv : 4;
-	uint8_t Mode : 3;
-	bool MainPower : 1;
-	bool AutoNext : 1;
-	bool AutoOff : 1;
-	bool MuteMode : 1;
-	uint16_t AutoNextTimer : 12;
-	uint16_t AutoOffTimer : 12;
-}SettingValues;
-
 
 /* Common Private function prototypes ----------------------------------------*/
 void PatternDischarge(uint8_t Ch);
@@ -101,7 +90,7 @@ ADC_HandleTypeDef* Frq_hadc;
 DMA_HandleTypeDef* Frq_hdma_adc;
 TIM_HandleTypeDef* PWM_htim;
 //-----------------------------------------------------------------------------
-const float FirmwareVersion = 2.020f;
+const float FirmwareVersion = 2.030f;
 //-----------------------------------------------------------------------------
 // 시드 테이블
 uint8_t UseModeCnt = 7; //사용 가능한 모드 개수
@@ -1325,10 +1314,9 @@ void wave_proc_Init(ADC_HandleTypeDef* Set_Frq_hadc, DMA_HandleTypeDef* Set_Frq_
 
 	FrqVoltPWM_Init(Set_Frq_hadc, Set_Frq_hdma_adc, set_PWM_htim);
 
-
-	// Test용
-	NowSetV.AutoNext = false;
-	NowSetV.AutoOff = false;
+	//// Test용
+	//NowSetV.AutoNext = false;
+	//NowSetV.AutoOff = false;
 }
 
 void wave_proc_update_main()
@@ -1375,7 +1363,9 @@ void wave_proc_SetStop()
 	led_SetLevel(NowSetV.Lv);
 	led_SetRGBGradationOn(true);
 
-	SoundPlayCheckMute(3);						// 동작을 정지합니다.	
+	SoundPlayCheckMute(3);						// 동작을 정지합니다.
+
+	wave_uart_Send(D_Remote_Stop);
 }
 
 void wave_proc_SetStopBase()
@@ -1399,7 +1389,7 @@ void wave_proc_SetStopBase()
 		PT_Freq_Step = 0; // = PT_Freq_Step_Change;		//굳이 할 필요 없어 보여 주석처리
 	}
 
-	NowSetV.AutoNextTimer = 0;;
+	NowSetV.AutoNextTimer = 0;
 }
 
 void wave_proc_SetStopAndReStart(void)
@@ -1426,7 +1416,8 @@ void wave_proc_SetLvUp()
 #else
 	SoundPlayCheckMute(NowSetV.Lv + 3);			// 1~14(레벨)
 #endif // VOICECHIP_16BIT
-	
+
+	wave_uart_Send(D_Remote_LvUp);
 }
 
 void wave_proc_SetLvDw()
@@ -1450,6 +1441,7 @@ void wave_proc_SetLvDw()
 		wave_proc_SetStop();
 	}
 
+	wave_uart_Send(D_Remote_LvDw);
 }
 
 void wave_proc_SetModeUp()
@@ -1472,6 +1464,8 @@ void wave_proc_SetModeUp()
 #else
 	SoundPlayCheckMute(NowSetV.Mode + 18);		// 빨강~쪽빛 모드입니다.
 #endif // VOICECHIP_16BIT
+
+	wave_uart_Send(D_Remote_ModeUp);
 }
 
 void wave_proc_SetModeDw()
@@ -1493,6 +1487,8 @@ void wave_proc_SetModeDw()
 #else
 	SoundPlayCheckMute(NowSetV.Mode + 18);		// 빨강~쪽빛 모드입니다.
 #endif // VOICECHIP_16BIT
+
+	wave_uart_Send(D_Remote_ModeDw);
 }
 
 void wave_proc_SetAutoNext()
@@ -1517,6 +1513,8 @@ void wave_proc_SetAutoNext()
 		SoundPlayCheckMute(28);					// 파형을 자동으로 바꾸지 않습니다.
 #endif // VOICECHIP_16BIT
 	}
+
+	wave_uart_Send(D_Remote_AutoNext);
 }
 
 void wave_proc_SetAutoOff()
@@ -1540,6 +1538,8 @@ void wave_proc_SetAutoOff()
 		SoundPlayCheckMute(26);					// 자동종료가 해제 되었습니다.
 #endif // VOICECHIP_16BIT
 	}
+
+	wave_uart_Send(D_Remote_AutoOff);
 }
 
 void wave_proc_SetMuteMode()
@@ -1564,6 +1564,8 @@ void wave_proc_SetMuteMode()
 #endif // VOICECHIP_16BIT
 
 	}
+
+	wave_uart_Send(D_Remote_MuteMode);
 }
 
 bool wave_proc_GetPw()
@@ -1585,6 +1587,13 @@ void wave_proc_SetPw(bool SetPower)
 		SoundPlayCheckMute(2);					// 프시케를 종료합니다.
 	}
 	NowSetV.MainPower = SetPower;
+
+	wave_uart_Send(D_Remote_MainPower);
+}
+
+SettingValues wave_proc_GetSetVal()
+{
+	return NowSetV;
 }
 
 void SoundPlayCheckMute(uint8_t num)

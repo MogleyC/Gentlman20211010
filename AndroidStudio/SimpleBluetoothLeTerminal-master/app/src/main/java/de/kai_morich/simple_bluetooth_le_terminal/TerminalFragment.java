@@ -15,10 +15,12 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.method.ScrollingMovementMethod;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -28,9 +30,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+
 public class TerminalFragment extends Fragment implements ServiceConnection, SerialListener {
 
-    private enum Connected { False, Pending, True }
+    private enum Connected {False, Pending, True}
 
     private String deviceAddress;
     private SerialService service;
@@ -44,6 +49,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     private boolean hexEnabled = false;
     private boolean pendingNewline = false;
     private String newline = TextUtil.newline_crlf;
+
+    private WaveRemoteSocket remote;
 
     /*
      * Lifecycle
@@ -67,7 +74,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     @Override
     public void onStart() {
         super.onStart();
-        if(service != null)
+        if (service != null)
             service.attach(this);
         else
             getActivity().startService(new Intent(getActivity(), SerialService.class)); // prevents service destroy on unbind from recreated activity caused by orientation change
@@ -75,12 +82,13 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
     @Override
     public void onStop() {
-        if(service != null && !getActivity().isChangingConfigurations())
+        if (service != null && !getActivity().isChangingConfigurations())
             service.detach();
         super.onStop();
     }
 
-    @SuppressWarnings("deprecation") // onAttach(context) was added with API 23. onAttach(activity) works for all API versions
+    @SuppressWarnings("deprecation")
+    // onAttach(context) was added with API 23. onAttach(activity) works for all API versions
     @Override
     public void onAttach(@NonNull Activity activity) {
         super.onAttach(activity);
@@ -89,14 +97,17 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
 
     @Override
     public void onDetach() {
-        try { getActivity().unbindService(this); } catch(Exception ignored) {}
+        try {
+            getActivity().unbindService(this);
+        } catch (Exception ignored) {
+        }
         super.onDetach();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(initialStart && service != null) {
+        if (initialStart && service != null) {
             initialStart = false;
             getActivity().runOnUiThread(this::connect);
         }
@@ -106,7 +117,7 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     public void onServiceConnected(ComponentName name, IBinder binder) {
         service = ((SerialService.SerialBinder) binder).getService();
         service.attach(this);
-        if(initialStart && isResumed()) {
+        if (initialStart && isResumed()) {
             initialStart = false;
             getActivity().runOnUiThread(this::connect);
         }
@@ -127,6 +138,8 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         receiveText.setTextColor(getResources().getColor(R.color.colorRecieveText)); // set as default color to reduce number of spans
         receiveText.setMovementMethod(ScrollingMovementMethod.getInstance());
 
+        remote = new WaveRemoteSocket(receiveText);
+
         sendText = view.findViewById(R.id.send_text);
         hexWatcher = new TextUtil.HexWatcher(sendText);
         hexWatcher.enable(hexEnabled);
@@ -136,20 +149,81 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
         View sendBtn = view.findViewById(R.id.send_btn);
         sendBtn.setOnClickListener(v -> send(sendText.getText().toString()));
 
-        View PowerBtn = view.findViewById(R.id.btn_pw);
-        PowerBtn.setOnClickListener(v -> send("0"));
+        View PowerBtn = view.findViewById(R.id.btn_Pw);
+        PowerBtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.onTouchEvent(event);
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    send(remote.SendDataMake(WaveRemoteSocket.P_Type.C_Remote_Stop));
+                    return true;
+                }
+                return false;
+            }
+        });
 
         View LvUpBtn = view.findViewById(R.id.btn_LvUp);
-        LvUpBtn.setOnClickListener(v -> send("1"));
+        LvUpBtn.setOnClickListener(v -> {
+            if (PowerBtn.isPressed()) {
+                send(remote.SendDataMake(WaveRemoteSocket.P_Type.C_Remote_MuteMode));
+            } else {
+                send(remote.SendDataMake(WaveRemoteSocket.P_Type.C_Remote_LvUp));
+            }
+        });
 
         View LvDwBtn = view.findViewById(R.id.btn_LvDw);
-        LvDwBtn.setOnClickListener(v -> send("2"));
+        LvDwBtn.setOnClickListener(v -> {
+            if (PowerBtn.isPressed()) {
+                send(remote.SendDataMake(WaveRemoteSocket.P_Type.C_Remote_LvDw));
+            } else {
+                send(remote.SendDataMake(WaveRemoteSocket.P_Type.C_Remote_LvDw));
+            }
+        });
 
         View MoUpBtn = view.findViewById(R.id.btn_MoUp);
-        MoUpBtn.setOnClickListener(v -> send("3"));
+        MoUpBtn.setOnClickListener(v -> {
+            if (PowerBtn.isPressed()) {
+                send(remote.SendDataMake(WaveRemoteSocket.P_Type.C_Remote_AutoNext));
+            } else {
+                send(remote.SendDataMake(WaveRemoteSocket.P_Type.C_Remote_ModeUp));
+            }
+        });
 
         View MoDwBtn = view.findViewById(R.id.btn_MoDw);
-        MoDwBtn.setOnClickListener(v -> send("4"));
+        MoDwBtn.setOnClickListener(v -> {
+            if (PowerBtn.isPressed()) {
+                send(remote.SendDataMake(WaveRemoteSocket.P_Type.C_Remote_AutoOff));
+            } else {
+                send(remote.SendDataMake(WaveRemoteSocket.P_Type.C_Remote_ModeDw));
+            }
+        });
+
+        View MailSendBtn = view.findViewById(R.id.btn_MailSend);
+        MailSendBtn.setOnClickListener(v -> {
+
+            // 파일 경로 및 이름 지정
+            String FilePath = getContext().getFilesDir().getAbsolutePath() + "/";
+            String FileName = "[PsycheLog][" + BluetoothAdapter.getDefaultAdapter().getName() +
+                    (new SimpleDateFormat("] yy-MM-dd HH:mm:ss")).format(System.currentTimeMillis());
+            String FileExpension = ".csv";
+
+            Log.d("MAIL", getContext().getFilesDir().getAbsolutePath() + "/");
+            Log.d("MAIL", getContext().getCacheDir().getAbsolutePath() + "/");
+//            getDataDir().getAbsolutePath()  // /data/user/0/com.codechacha.storages
+//            getFilesDir().getAbsolutePath() // /data/user/0/com.codechacha.storages/files
+//            getCacheDir().getAbsolutePath() // /data/user/0/com.codechacha.storages/cache
+
+            // 파일 만들기
+            File tmpFile = FileIOSocket.FileSave(FilePath + FileName + FileExpension, remote.GetLogText().toString());
+
+            // 메일 보내기
+            EmailSocket.Send(
+                    getActivity().getApplicationContext(),
+                    new String[]{"indra1469@naver.com"},
+                    FileName,
+                    null,
+                    tmpFile);
+        });
 
         return view;
     }
@@ -212,14 +286,14 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     }
 
     private void send(String str) {
-        if(connected != Connected.True) {
+        if (connected != Connected.True) {
             Toast.makeText(getActivity(), "not connected", Toast.LENGTH_SHORT).show();
             return;
         }
         try {
             String msg;
             byte[] data;
-            if(hexEnabled) {
+            if (hexEnabled) {
                 StringBuilder sb = new StringBuilder();
                 TextUtil.toHexString(sb, TextUtil.fromHexString(str));
                 TextUtil.toHexString(sb, newline.getBytes());
@@ -232,6 +306,18 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
             SpannableStringBuilder spn = new SpannableStringBuilder(msg + '\n');
             spn.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorSendText)), 0, spn.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             receiveText.append(spn);
+            send(data);
+        } catch (Exception e) {
+            onSerialIoError(e);
+        }
+    }
+
+    private void send(byte[] data) {
+        if (connected != Connected.True) {
+            Toast.makeText(getActivity(), "not connected", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        try {
             service.write(data);
         } catch (Exception e) {
             onSerialIoError(e);
@@ -239,29 +325,32 @@ public class TerminalFragment extends Fragment implements ServiceConnection, Ser
     }
 
     private void receive(byte[] data) {
-        if(hexEnabled) {
-            receiveText.append(TextUtil.toHexString(data) + '\n');
-        } else {
-            String msg = new String(data);
-            if(newline.equals(TextUtil.newline_crlf) && msg.length() > 0) {
-                // don't show CR as ^M if directly before LF
-                msg = msg.replace(TextUtil.newline_crlf, TextUtil.newline_lf);
-                // special handling if CR and LF come in separate fragments
-                if (pendingNewline && msg.charAt(0) == '\n') {
-                    Editable edt = receiveText.getEditableText();
-                    if (edt != null && edt.length() > 1)
-                        edt.replace(edt.length() - 2, edt.length(), "");
-                }
-                pendingNewline = msg.charAt(msg.length() - 1) == '\r';
-            }
-            receiveText.append(TextUtil.toCaretString(msg, newline.length() != 0));
-        }
+        remote.PutData(data);
+//        if(hexEnabled) {
+//            receiveText.append(TextUtil.toHexString(data) + '\n');
+//        } else {
+//            String msg = new String(data);
+//            if(newline.equals(TextUtil.newline_crlf) && msg.length() > 0) {
+//                // don't show CR as ^M if directly before LF
+//                msg = msg.replace(TextUtil.newline_crlf, TextUtil.newline_lf);
+//                // special handling if CR and LF come in separate fragments
+//                if (pendingNewline && msg.charAt(0) == '\n') {
+//                    Editable edt = receiveText.getEditableText();
+//                    if (edt != null && edt.length() > 1)
+//                        edt.replace(edt.length() - 2, edt.length(), "");
+//                }
+//                pendingNewline = msg.charAt(msg.length() - 1) == '\r';
+//            }
+//            receiveText.append(TextUtil.toCaretString(msg, newline.length() != 0));
+//        }
     }
 
     private void status(String str) {
-        SpannableStringBuilder spn = new SpannableStringBuilder(str + '\n');
+//        SpannableStringBuilder spn = new SpannableStringBuilder(str + '\n');
+        SpannableStringBuilder spn = new SpannableStringBuilder(str);
         spn.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorStatusText)), 0, spn.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        receiveText.append(spn);
+//        receiveText.append(spn);
+        remote.AddLogStatus(spn);
     }
 
     /*

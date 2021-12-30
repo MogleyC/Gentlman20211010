@@ -509,7 +509,7 @@ uint32_t ble_uart_data_send(uint8_t * p_data, uint16_t length)
 {
 	uint32_t err_code;
 
-	if (length > 1)
+	if (length > 0)
 	{
 		NRF_LOG_DEBUG("Ready to send data over BLE NUS");
 		NRF_LOG_HEXDUMP_DEBUG(p_data, length);
@@ -524,6 +524,10 @@ uint32_t ble_uart_data_send(uint8_t * p_data, uint16_t length)
 				APP_ERROR_CHECK(err_code);
 			}
 		} while (err_code == NRF_ERROR_RESOURCES);
+	}
+	else
+	{
+		err_code = NRF_ERROR_INVALID_LENGTH;
 	}
 
 	return err_code;

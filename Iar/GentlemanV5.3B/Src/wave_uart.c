@@ -71,6 +71,66 @@ extern uint8_t TimChec_500msCnt;		//Tim3반복 횟수(500msec용)
 extern uint8_t TimChec_1s;				//1sec도달 확인
 extern uint8_t TimChec_1sCnt;			//Tim3반복 횟수(1sec용)
 
+//enum P_Type	//include wave_uart.h
+
+const static uint8_t Protocol[P_Type_End] =
+{
+	0x00,		//C_CheckConnect
+	0x50,		//D_CheckConnect
+
+	0x01,		//C_InitProcess
+	0x51,		//D_InitProcess
+
+	0x02,		//C_StopProcess
+	0x52,		//D_StopProcess
+
+	0x03,		//C_StartProcess
+	0x53,		//D_StartProcess
+
+	0x04,		//C_CheckDataSize
+	0x54,		//D_CheckDataSize
+
+	0x05,		//C_SendDatas
+	0x55,		//D_SendDatas
+
+	0x06,		//C_SendGetVersion
+	0x56,		//D_SendGetVersion
+
+	0x07,		//C_EchoStatus
+	0x57,		//D_EchoStatus
+
+	0x20,		//C_Remote_Stop
+	0x70,		//D_Remote_Stop
+
+	0x21,		//C_Remote_LvUp
+	0x71,		//D_Remote_LvUp
+
+	0x22,		//C_Remote_LvDw
+	0x72,		//D_Remote_LvDw
+
+	0x23,		//C_Remote_ModeUp
+	0x73,		//D_Remote_ModeUp
+
+	0x24,		//C_Remote_ModeDw
+	0x74,		//D_Remote_ModeDw
+
+	0x25,		//C_Remote_MainPower
+	0x75,		//D_Remote_MainPower
+
+	0x26,		//C_Remote_AutoNext
+	0x76,		//D_Remote_AutoNext
+
+	0x27,		//C_Remote_AutoOff
+	0x77,		//D_Remote_AutoOff
+
+	0x28,		//C_Remote_MuteMode
+	0x78,		//D_Remote_MuteMode
+};
+
+static uint8_t Protocol_Common[4] = { 0x55, 0x0A, 0x00, 0xFF };
+
+static bool wave_uart_Send_Enable = true;
+
 /* Private user code ---------------------------------------------------------*/
 
 void wave_uart_init()
@@ -107,99 +167,11 @@ void ProtocolCheck(uint8_t readBuff)
 
 	//static uint8_t DataSizes[14];
 
-	enum P_Type
-	{
-		C_CheckConnect,
-		D_CheckConnect,
-
-		C_InitProcess,
-		D_InitProcess,
-
-		C_StopProcess,
-		D_StopProcess,
-
-		C_StartProcess,
-		D_StartProcess,
-
-		C_SendGetVersion,
-
-		C_CheckDataSize,
-
-		C_SendDatas,
-		D_SendDatas,
-
-		C_Controll_Stop,
-		D_Controll_Stop,
-
-		C_Controll_LvUp,
-		D_Controll_LvUp,
-
-		C_Controll_LvDw,
-		D_Controll_LvDw,
-
-		C_Controll_ModeUp,
-		D_Controll_ModeUp,
-
-		C_Controll_ModeDw,
-		D_Controll_ModeDw,
-	};
-
-	static uint8_t Protocol_Common[4] = { 0x55, 0x0A, 0x00, 0xFF };
-
-	const static uint8_t Protocol[22] =
-	{
-		0x00,
-		0x50,
-
-		0x01,
-		0x51,
-
-		0x02,
-		0x52,
-
-		0x03,
-		0x53,
-
-		0x06,
-
-		0x04,
-
-		0x05,
-		0x55,
-
-		0x20,
-		0x70,
-
-		0x21,
-		0x71,
-
-		0x22,
-		0x72,
-
-		0x23,
-		0x73,
-
-		0x24,
-		0x74,
-	};
-
 	enum PC_Step
 	{
 		PCS_CheckComand,
 		PCS_UpdateData,
 	};
-
-	typedef union
-	{
-		uint8_t b[4];
-		float f;
-	} union_data_4byte;
-
-	typedef union
-	{
-		uint8_t b[2];
-		uint16_t ui16;
-	} union_data_2byte;
 
 	static uint8_t Now_PC_Step = PCS_CheckComand;
 
@@ -244,7 +216,7 @@ void ProtocolCheck(uint8_t readBuff)
 
 
 			IsMatched = false;
-			for (; ProtocolID < 22; ProtocolID++)
+			for (; ProtocolID < P_Type_End; ProtocolID++)
 			{
 				if (Protocol[ProtocolID] == rbs[2])
 				{
@@ -261,31 +233,33 @@ void ProtocolCheck(uint8_t readBuff)
 		{
 
 		case C_CheckConnect:
+		case C_CheckDataSize:
+		case C_SendGetVersion:
+		case C_EchoStatus:
 		{
-			Protocol_Common[2] = Protocol[D_CheckConnect];
-			uart_custom_SendData(Protocol_Common, 4);
+			wave_uart_Send(ProtocolID + 1);
 			break;
 		}
 
 		case C_InitProcess:
 		{
-			wave_proc_SetStopBase();
+			wave_uart_Send(D_InitProcess);
 
-			Protocol_Common[2] = Protocol[D_InitProcess];
-			uart_custom_SendData(Protocol_Common, 4);
+			wave_uart_Send_Enable = false;
+			wave_proc_SetStopBase();
+			wave_uart_Send_Enable = true;
 			break;
 		}
 
 		case C_StopProcess:
 		{
-			Protocol_Common[2] = Protocol[D_StopProcess];
-			uart_custom_SendData(Protocol_Common, 4);
-
 			// UART 통신 전용 루프 시작
 			if (LoopforUART == 0) {
 				LoopforUART = 1;
 				main_forUART();
 			}
+
+			wave_uart_Send(D_StopProcess);
 
 			break;
 		}
@@ -295,8 +269,7 @@ void ProtocolCheck(uint8_t readBuff)
 			// UART 통신 전용 루프 종료
 			LoopforUART = 0;
 
-			Protocol_Common[2] = Protocol[D_StartProcess];
-			uart_custom_SendData(Protocol_Common, 4);
+			wave_uart_Send(D_StartProcess);
 
 			//LED 일시 끄기(Flash 기록중 일부 프로세스등이 일시정지 되므로)
 			for (uint8_t i = 0; i < 6; i++)
@@ -316,79 +289,12 @@ void ProtocolCheck(uint8_t readBuff)
 			break;
 		}
 
-		case C_SendGetVersion:
-		{
-			// 펌웨어 버전정보 송신
-			union_data_4byte tmpVer;
-			tmpVer.f = FirmwareVersion;
-
-			uart_custom_SendData(tmpVer.b, 4);
-
-			break;
-		}
-
-		case C_CheckDataSize:
-		{
-			//{
-			//	int tmpSize[5];
-
-			//	//Power_UserLv
-			//	tmpSize[0] = sizeof(Power_UserLv);
-			//	tmpSize[1] = sizeof(Power_UserLv[0]);
-			//	tmpSize[2] = sizeof(Power_UserLv[0][0]);
-			//	tmpSize[3] = sizeof(Power_UserLv[0][0][0]);
-			//	DataSizes[0] = (uint8_t)(tmpSize[0] / tmpSize[1]);
-			//	DataSizes[1] = (uint8_t)(tmpSize[1] / tmpSize[2]);
-			//	DataSizes[2] = (uint8_t)(tmpSize[2] / tmpSize[3]);
-
-			//	//Pattern_Base
-			//	tmpSize[0] = sizeof(Pattern_Base);
-			//	tmpSize[1] = sizeof(Pattern_Base[0]);
-			//	tmpSize[2] = sizeof(Pattern_Base[0][0]);
-			//	DataSizes[3] = (uint8_t)(tmpSize[0] / tmpSize[1]);
-			//	DataSizes[4] = (uint8_t)(tmpSize[1] / tmpSize[2]);
-
-			//	//Pattern_Freq
-			//	tmpSize[0] = sizeof(Pattern_Freq);
-			//	tmpSize[1] = sizeof(Pattern_Freq[0]);
-			//	tmpSize[2] = sizeof(Pattern_Freq[0][0]);
-			//	DataSizes[5] = (uint8_t)(tmpSize[0] / tmpSize[1]);
-			//	DataSizes[6] = (uint8_t)(tmpSize[1] / tmpSize[2]);
-
-			//	//Pattern_Time
-			//	tmpSize[0] = sizeof(Pattern_Time);
-			//	tmpSize[1] = sizeof(Pattern_Time[0]);
-			//	tmpSize[2] = sizeof(Pattern_Time[0][0]);
-			//	tmpSize[3] = sizeof(Pattern_Time[0][0][0]);
-			//	DataSizes[7] = (uint8_t)(tmpSize[0] / tmpSize[1]);
-			//	DataSizes[8] = (uint8_t)(tmpSize[1] / tmpSize[2]);
-			//	DataSizes[9] = (uint8_t)(tmpSize[2] / tmpSize[3]);
-
-			//	//Power_Wave
-			//	tmpSize[0] = sizeof(Power_Wave);
-			//	tmpSize[1] = sizeof(Power_Wave[0]);
-			//	tmpSize[2] = sizeof(Power_Wave[0][0]);
-			//	tmpSize[3] = sizeof(Power_Wave[0][0][0]);
-			//	tmpSize[4] = sizeof(Power_Wave[0][0][0][0]);
-			//	DataSizes[10] = (uint8_t)(tmpSize[0] / tmpSize[1]);
-			//	DataSizes[11] = (uint8_t)(tmpSize[1] / tmpSize[2]);
-			//	DataSizes[12] = (uint8_t)(tmpSize[2] / tmpSize[3]);
-			//	DataSizes[13] = (uint8_t)(tmpSize[3] / tmpSize[4]);
-			//}
-
-			uart_custom_SendData(WaveDataSizeArr, 14);
-			break;
-		}
-
 		case C_SendDatas:
 		{
-			Protocol_Common[2] = Protocol[D_SendDatas];
-			uart_custom_SendData(Protocol_Common, 4);
+			wave_uart_Send(D_SendDatas);
 
 			Now_PC_Step = PCS_UpdateData;
-			//rbs_cnt = 0;
 			srb_cnt = 0;
-			//rbts_cnt = 0;
 			UD_Step = 0;
 			for (int i = 0; i < 4; i++)
 			{
@@ -398,53 +304,66 @@ void ProtocolCheck(uint8_t readBuff)
 			break;
 		}
 
-		case C_Controll_Stop:
+		case C_Remote_Stop:
 		{
+			//wave_uart_Send(D_Remote_Stop);
 			wave_proc_SetStop();
-
-			Protocol_Common[2] = Protocol[D_Controll_Stop];
-			uart_custom_SendData(Protocol_Common, 4);
-
 			break;
 		}
 
-		case C_Controll_LvUp:
+		case C_Remote_LvUp:
 		{
+			//wave_uart_Send(D_Remote_LvUp);
 			wave_proc_SetLvUp();
-
-			Protocol_Common[2] = Protocol[D_Controll_LvUp];
-			uart_custom_SendData(Protocol_Common, 4);
-
 			break;
 		}
 
-		case C_Controll_LvDw:
+		case C_Remote_LvDw:
 		{
+			//wave_uart_Send(D_Remote_LvDw);
 			wave_proc_SetLvDw();
-
-			Protocol_Common[2] = Protocol[D_Controll_LvDw];
-			uart_custom_SendData(Protocol_Common, 4);
-
 			break;
 		}
 
-		case C_Controll_ModeUp:
+		case C_Remote_ModeUp:
 		{
+			//wave_uart_Send(D_Remote_ModeUp);
 			wave_proc_SetModeUp();
-
-			Protocol_Common[2] = Protocol[D_Controll_ModeUp];
-			uart_custom_SendData(Protocol_Common, 4);
-
 			break;
 		}
 
-		case C_Controll_ModeDw:
+		case C_Remote_ModeDw:
 		{
+			//wave_uart_Send(D_Remote_ModeDw);
 			wave_proc_SetModeDw();
+			break;
+		}
 
-			Protocol_Common[2] = Protocol[D_Controll_ModeDw];
-			uart_custom_SendData(Protocol_Common, 4);
+		case C_Remote_MainPower:
+		{
+			//wave_uart_Send(D_Remote_MainPower);
+			wave_proc_SetPw(!wave_proc_GetPw());
+			break;
+		}
 
+		case C_Remote_AutoNext:
+		{
+			//wave_uart_Send(D_Remote_AutoNext);
+			wave_proc_SetAutoNext();
+			break;
+		}
+
+		case C_Remote_AutoOff:
+		{
+			//wave_uart_Send(D_Remote_AutoOff);
+			wave_proc_SetAutoOff();
+			break;
+		}
+
+		case C_Remote_MuteMode:
+		{
+			//wave_uart_Send(D_Remote_MuteMode);
+			wave_proc_SetMuteMode();
 			break;
 		}
 
@@ -494,42 +413,6 @@ void ProtocolCheck(uint8_t readBuff)
 				++UD_Step;
 			}
 
-
-			//// 버퍼 저장
-			//rbs[rbs_cnt] = readBuff;
-			//++rbs_cnt;
-
-			////4byte -> float 1개분의 데이트를 받은 경우
-			//if (rbs_cnt > 3)
-			//{
-			//	rbs_cnt = 0;
-
-			//	union_data_4byte tmpFloat;
-			//	memcpy(tmpFloat.b, rbs, 4);
-
-			//	Power_UserLv[UD_ID[0]][UD_ID[1]][UD_ID[2]] = tmpFloat.f;
-
-			//	++UD_ID[2];
-			//	if (UD_ID[2] >= DataSizes[2])
-			//	{
-			//		UD_ID[2] = 0;
-			//		++UD_ID[1];
-
-			//		if (UD_ID[1] >= DataSizes[1])
-			//		{
-			//			UD_ID[1] = 0;
-			//			++UD_ID[0];
-
-			//			if (UD_ID[0] >= DataSizes[0])
-			//			{
-			//				UD_ID[0] = 0;
-			//				++UD_Step;
-			//			}
-			//		}
-			//	}
-
-			//}
-
 			break;
 		}
 
@@ -544,22 +427,6 @@ void ProtocolCheck(uint8_t readBuff)
 				UD_ID = 0;
 				++UD_Step;
 			}
-
-			//Pattern_Base[UD_ID[0]][UD_ID[1]] = readBuff;
-
-			//++UD_ID[1];
-
-			//if (UD_ID[1] >= DataSizes[4])
-			//{
-			//	UD_ID[1] = 0;
-			//	++UD_ID[0];
-
-			//	if (UD_ID[0] >= DataSizes[3])
-			//	{
-			//		UD_ID[0] = 0;
-			//		++UD_Step;
-			//	}
-			//}
 
 			break;
 		}
@@ -576,36 +443,6 @@ void ProtocolCheck(uint8_t readBuff)
 				++UD_Step;
 			}
 
-			//// 버퍼 저장
-			//rbs[rbs_cnt] = readBuff;
-			//++rbs_cnt;
-
-			////4byte -> float 1개분의 데이트를 받은 경우
-			//if (rbs_cnt > 1)
-			//{
-			//	rbs_cnt = 0;
-
-			//	union_data_2byte tmpUi16;
-			//	memcpy(tmpUi16.b, rbs, 2);
-
-
-			//	Pattern_Freq[UD_ID[0]][UD_ID[1]] = tmpUi16.ui16;
-
-			//	++UD_ID[1];
-
-			//	if (UD_ID[1] >= DataSizes[6])
-			//	{
-			//		UD_ID[1] = 0;
-			//		++UD_ID[0];
-
-			//		if (UD_ID[0] >= DataSizes[5])
-			//		{
-			//			UD_ID[0] = 0;
-			//			++UD_Step;
-			//		}
-			//	}
-			//}
-
 			break;
 		}
 
@@ -621,28 +458,6 @@ void ProtocolCheck(uint8_t readBuff)
 				++UD_Step;
 			}
 
-			//Pattern_Time[UD_ID[0]][UD_ID[1]][UD_ID[2]] = readBuff;
-
-			//++UD_ID[2];
-
-			//if (UD_ID[2] >= DataSizes[9])
-			//{
-			//	UD_ID[2] = 0;
-			//	++UD_ID[1];
-
-			//	if (UD_ID[1] >= DataSizes[8])
-			//	{
-			//		UD_ID[1] = 0;
-			//		++UD_ID[0];
-
-			//		if (UD_ID[0] >= DataSizes[7])
-			//		{
-			//			UD_ID[0] = 0;
-			//			++UD_Step;
-			//		}
-			//	}
-			//}
-
 			break;
 		}
 
@@ -655,7 +470,6 @@ void ProtocolCheck(uint8_t readBuff)
 			if (UD_ID >= WaveDataSizeByte[4])
 			{
 				UD_ID = 0;
-				//++UD_Step;
 				UD_Step = 0;
 				Now_PC_Step = PCS_CheckComand;
 
@@ -666,44 +480,6 @@ void ProtocolCheck(uint8_t readBuff)
 					srb_cnt = 0;
 				}
 			}
-
-			//Power_Wave[UD_ID[0]][UD_ID[1]][UD_ID[2]][UD_ID[3]] = readBuff;
-
-			//++UD_ID[3];
-			//if (UD_ID[3] >= DataSizes[13])
-			//{
-			//	UD_ID[3] = 0;
-			//	++UD_ID[2];
-
-			//	if (UD_ID[2] >= DataSizes[12])
-			//	{
-			//		UD_ID[2] = 0;
-			//		++UD_ID[1];
-
-			//		if (UD_ID[1] >= DataSizes[11])
-			//		{
-			//			UD_ID[1] = 0;
-			//			++UD_ID[0];
-
-			//			if (UD_ID[0] >= DataSizes[10])
-			//			{
-			//				UD_ID[0] = 0;
-			//				//++UD_Step;
-			//				UD_Step = 0;
-			//				Now_PC_Step = PCS_CheckComand;
-
-			//				if (srb_cnt > 0)
-			//				{
-			//					// 지정된 개수만큼 저장된 경우 응답
-			//					uart_custom_SendData(srb, srb_cnt);
-			//					srb_cnt = 0;
-			//				}
-
-			//				break;
-			//			}
-			//		}
-			//	}
-			//}
 
 			break;
 		}
@@ -860,5 +636,135 @@ void main_forUART()
 		/* USER CODE END WHILE */
 
 		/* USER CODE BEGIN 3 */
+	}
+}
+
+void wave_uart_Send(uint8_t Protocol_Type)
+{
+	typedef union
+	{
+		uint8_t b[4];
+		float f;
+	} union_data_4byte;
+
+	if (!wave_uart_Send_Enable)
+		return;
+
+	// C_타입(Controll)의 프로토콜은 실행하지 않는다.
+	if (Protocol[Protocol_Type] < Protocol[D_CheckConnect])
+		return;
+
+	// D_타입(Device)의 프로토콜에 의해 UART TX한다.
+	switch (Protocol_Type)
+	{
+
+	case D_EchoStatus:
+	{
+		Protocol_Common[2] = Protocol[Protocol_Type];
+		uart_custom_SendData(Protocol_Common, 4);
+
+		uart_custom_SendData(wave_proc_GetSetVal().b, 5);
+		break;
+	}
+
+	case D_Remote_Stop:
+	case D_Remote_LvUp:
+	case D_Remote_LvDw:
+	case D_Remote_ModeUp:
+	case D_Remote_ModeDw:
+	case D_Remote_MainPower:
+	case D_Remote_AutoNext:
+	case D_Remote_AutoOff:
+	case D_Remote_MuteMode:
+	{
+		Protocol_Common[2] = Protocol[Protocol_Type];
+		uart_custom_SendData(Protocol_Common, 4);
+		wave_uart_Send(D_EchoStatus);
+                
+		break;
+	}
+
+	case D_SendGetVersion:
+	{
+		// 펌웨어 버전정보 송신
+		union_data_4byte tmpVer;
+		tmpVer.f = FirmwareVersion;
+
+		Protocol_Common[2] = Protocol[Protocol_Type];
+		uart_custom_SendData(Protocol_Common, 4);
+		uart_custom_SendData(tmpVer.b, 4);
+
+		break;
+	}
+
+	case D_CheckDataSize:
+	{
+		//{
+		//	int tmpSize[5];
+
+		//	//Power_UserLv
+		//	tmpSize[0] = sizeof(Power_UserLv);
+		//	tmpSize[1] = sizeof(Power_UserLv[0]);
+		//	tmpSize[2] = sizeof(Power_UserLv[0][0]);
+		//	tmpSize[3] = sizeof(Power_UserLv[0][0][0]);
+		//	DataSizes[0] = (uint8_t)(tmpSize[0] / tmpSize[1]);
+		//	DataSizes[1] = (uint8_t)(tmpSize[1] / tmpSize[2]);
+		//	DataSizes[2] = (uint8_t)(tmpSize[2] / tmpSize[3]);
+
+		//	//Pattern_Base
+		//	tmpSize[0] = sizeof(Pattern_Base);
+		//	tmpSize[1] = sizeof(Pattern_Base[0]);
+		//	tmpSize[2] = sizeof(Pattern_Base[0][0]);
+		//	DataSizes[3] = (uint8_t)(tmpSize[0] / tmpSize[1]);
+		//	DataSizes[4] = (uint8_t)(tmpSize[1] / tmpSize[2]);
+
+		//	//Pattern_Freq
+		//	tmpSize[0] = sizeof(Pattern_Freq);
+		//	tmpSize[1] = sizeof(Pattern_Freq[0]);
+		//	tmpSize[2] = sizeof(Pattern_Freq[0][0]);
+		//	DataSizes[5] = (uint8_t)(tmpSize[0] / tmpSize[1]);
+		//	DataSizes[6] = (uint8_t)(tmpSize[1] / tmpSize[2]);
+
+		//	//Pattern_Time
+		//	tmpSize[0] = sizeof(Pattern_Time);
+		//	tmpSize[1] = sizeof(Pattern_Time[0]);
+		//	tmpSize[2] = sizeof(Pattern_Time[0][0]);
+		//	tmpSize[3] = sizeof(Pattern_Time[0][0][0]);
+		//	DataSizes[7] = (uint8_t)(tmpSize[0] / tmpSize[1]);
+		//	DataSizes[8] = (uint8_t)(tmpSize[1] / tmpSize[2]);
+		//	DataSizes[9] = (uint8_t)(tmpSize[2] / tmpSize[3]);
+
+		//	//Power_Wave
+		//	tmpSize[0] = sizeof(Power_Wave);
+		//	tmpSize[1] = sizeof(Power_Wave[0]);
+		//	tmpSize[2] = sizeof(Power_Wave[0][0]);
+		//	tmpSize[3] = sizeof(Power_Wave[0][0][0]);
+		//	tmpSize[4] = sizeof(Power_Wave[0][0][0][0]);
+		//	DataSizes[10] = (uint8_t)(tmpSize[0] / tmpSize[1]);
+		//	DataSizes[11] = (uint8_t)(tmpSize[1] / tmpSize[2]);
+		//	DataSizes[12] = (uint8_t)(tmpSize[2] / tmpSize[3]);
+		//	DataSizes[13] = (uint8_t)(tmpSize[3] / tmpSize[4]);
+		//}
+
+		Protocol_Common[2] = Protocol[Protocol_Type];
+		uart_custom_SendData(Protocol_Common, 4);
+
+		uart_custom_SendData(WaveDataSizeArr, 14);
+
+		break;
+	}
+
+	//case D_CheckConnect:
+	//case D_InitProcess:
+	//case D_StopProcess:
+	//case D_StartProcess:
+	//case D_SendDatas:
+	default:
+	{
+		Protocol_Common[2] = Protocol[Protocol_Type];
+		uart_custom_SendData(Protocol_Common, 4);
+                
+		break;
+	}
 	}
 }

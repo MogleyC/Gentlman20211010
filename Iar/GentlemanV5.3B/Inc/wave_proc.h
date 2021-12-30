@@ -27,6 +27,22 @@ extern "C" {
 #include "stm32g0xx_hal.h"
 
 /* Exported types ------------------------------------------------------------*/
+typedef struct {
+	union {
+		uint8_t b[5];
+		struct 
+		{
+			uint16_t AutoNextTimer : 12;
+			uint8_t Lv : 4;
+			uint16_t AutoOffTimer : 12;
+			uint8_t Mode : 3;
+			bool MainPower : 1;
+			bool AutoNext : 1;
+			bool AutoOff : 1;
+			bool MuteMode : 1;
+		};
+	};
+}SettingValues;
 
 /* Exported constants --------------------------------------------------------*/
 
@@ -47,6 +63,7 @@ void wave_proc_SetAutoOff();
 void wave_proc_SetMuteMode();
 bool wave_proc_GetPw();
 void wave_proc_SetPw(bool SetPower);
+SettingValues wave_proc_GetSetVal();
 void SoundPlayCheckMute(uint8_t num);
 
 void wave_proc_update_PatternNode();
